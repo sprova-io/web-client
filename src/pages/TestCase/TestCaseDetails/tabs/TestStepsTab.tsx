@@ -1,7 +1,7 @@
-import { Col, Row } from 'antd';
-import React from 'react';
-import { TestCase } from 'sprova-types';
-import './OverviewTab.scss';
+import { Col, Row } from "antd";
+import React from "react";
+import { TestCase } from "sprova-types";
+import "./OverviewTab.scss";
 
 interface Props {
   testCase: TestCase;
@@ -10,7 +10,7 @@ interface Props {
 
 const TestStepsTab: React.FunctionComponent<Props> = ({
   testCase,
-  testCases,
+  testCases
 }) => {
   return (
     <Row gutter={24}>

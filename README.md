@@ -1,6 +1,11 @@
 # Sprova Web Client
 
+<<<<<<< HEAD
 [![Build Status](https://travis-ci.org/aldialimucaj/sprova-web-react.svg?branch=master)](https://travis-ci.org/aldialimucaj/sprova-web-react)
+=======
+[![Build Status](https://travis-ci.org/sprova-io/web-client.svg?branch=master)](https://travis-ci.org/sprova-io/web-client)
+[![codecov](https://codecov.io/gh/sprova-io/web-client/branch/master/graph/badge.svg)](https://codecov.io/gh/sprova-io/web-client)
+>>>>>>> cc1ba30aa3764fa044bb6c4ad6babb8e877765e4
 
 ## Development
 Generally we push on master branch. This branch is built, tested and statically checked with tslint. If all three stages pass successfully then the build tag is set to ***passing***.

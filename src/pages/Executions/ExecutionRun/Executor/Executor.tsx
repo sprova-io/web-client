@@ -1,17 +1,17 @@
-import { getExecutionSteps, updateExecutionStep } from '@/api/execution.api';
-import Level from '@/components/Level';
-import TextArea from '@/components/TextArea';
-import { useFormTextArea } from '@/hooks/useFormTextArea';
-import { Alert, Button, Icon, List, notification, Spin, Tag } from 'antd';
-import _ from 'lodash';
-import React, { Fragment, useEffect, useState } from 'react';
-import { RouteComponentProps, withRouter } from 'react-router-dom';
+import { getExecutionSteps, updateExecutionStep } from "@/api/execution.api";
+import Level from "@/components/Level";
+import TextArea from "@/components/TextArea";
+import { useFormTextArea } from "@/hooks/useFormTextArea";
+import { Alert, Button, Icon, List, notification, Spin, Tag } from "antd";
+import _ from "lodash";
+import React, { Fragment, useEffect, useState } from "react";
+import { RouteComponentProps, withRouter } from "react-router-dom";
 import {
   ExecutionStatus,
   ExecutionStep,
-  ExecutionStepResult,
-} from 'sprova-types';
-import './Executor.scss';
+  ExecutionStepResult
+} from "sprova-types";
+import "./Executor.scss";
 
 interface Props extends RouteComponentProps {
   eid: string;
@@ -21,7 +21,7 @@ interface Props extends RouteComponentProps {
 const Executor: React.FunctionComponent<Props> = ({ eid, onFinish }) => {
   const [executionSteps, setExecutionSteps] = useState<ExecutionStep[]>([]);
   const [isExecutionStepsLoading, setIsExecutionStepsLoading] = useState(true);
-  const [error, setError] = useState<string>('');
+  const [error, setError] = useState<string>("");
 
   const [currentStep, setCurrentStep] = useState<ExecutionStep>();
 
@@ -29,8 +29,8 @@ const Executor: React.FunctionComponent<Props> = ({ eid, onFinish }) => {
   const {
     value: stepMessage,
     setValue: setStepMessage,
-    handleChange: handleStepMessageChange,
-  } = useFormTextArea('');
+    handleChange: handleStepMessageChange
+  } = useFormTextArea("");
 
   const findFirstPendingStep = (
     steps: ExecutionStep[]
@@ -62,14 +62,14 @@ const Executor: React.FunctionComponent<Props> = ({ eid, onFinish }) => {
 
   const handleStepSelect = (executionStep: ExecutionStep) => {
     setCurrentStep(executionStep);
-    setStepMessage('');
+    setStepMessage("");
   };
 
   const handleStepResult = async (result: ExecutionStepResult) => {
     const executionStepNew: ExecutionStep = {
       ...currentStep!,
       ...(stepMessage && { message: stepMessage }),
-      result,
+      result
     };
 
     setIsStepUpdateLoading(true);
@@ -79,7 +79,7 @@ const Executor: React.FunctionComponent<Props> = ({ eid, onFinish }) => {
 
       const index = _.findIndex(executionSteps, {
         action: executionStepNew.action,
-        expected: executionStepNew.expected,
+        expected: executionStepNew.expected
       });
 
       executionSteps!.splice(index, 1, executionStepNew);
@@ -96,9 +96,9 @@ const Executor: React.FunctionComponent<Props> = ({ eid, onFinish }) => {
     } catch (error) {
       setIsStepUpdateLoading(false);
       notification.error({
-        placement: 'bottomRight',
-        message: 'Failed to update Execution Step',
-        description: error,
+        placement: "bottomRight",
+        message: "Failed to update Execution Step",
+        description: error
       });
     }
   };
@@ -106,19 +106,19 @@ const Executor: React.FunctionComponent<Props> = ({ eid, onFinish }) => {
   const getTagColor = (result: ExecutionStepResult): string => {
     switch (result) {
       case ExecutionStepResult.Successful: {
-        return 'green';
+        return "green";
       }
       case ExecutionStepResult.Failed: {
-        return 'red';
+        return "red";
       }
       case ExecutionStepResult.Pending: {
-        return 'blue';
+        return "blue";
       }
       case ExecutionStepResult.Warning: {
-        return 'orange';
+        return "orange";
       }
       default: {
-        return '';
+        return "";
       }
     }
   };
@@ -126,7 +126,7 @@ const Executor: React.FunctionComponent<Props> = ({ eid, onFinish }) => {
   useEffect(() => {
     const fetchData = async () => {
       setIsExecutionStepsLoading(true);
-      setError('');
+      setError("");
 
       try {
         const fetchedData = await getExecutionSteps(eid);
@@ -134,7 +134,7 @@ const Executor: React.FunctionComponent<Props> = ({ eid, onFinish }) => {
 
         const firstPendingStep = findFirstPendingStep(fetchedData);
         setCurrentStep(firstPendingStep);
-        setStepMessage('');
+        setStepMessage("");
       } catch (error) {
         setError(error);
       }
@@ -165,10 +165,10 @@ const Executor: React.FunctionComponent<Props> = ({ eid, onFinish }) => {
             currentStep && executionStep.key === currentStep.key ? (
               <List.Item
                 style={{
-                  display: 'block',
+                  display: "block",
                   paddingBottom: 24,
-                  backgroundColor: 'rgba(0, 0, 0, 0.025)',
-                  overflow: 'hidden',
+                  backgroundColor: "rgba(0, 0, 0, 0.025)",
+                  overflow: "hidden"
                 }}
               >
                 <Spin spinning={isStepUpdateLoading}>
@@ -179,11 +179,11 @@ const Executor: React.FunctionComponent<Props> = ({ eid, onFinish }) => {
                     </div>
                     <Fragment>
                       {executionStep.inheritedFrom ? (
-                        <Tag style={{ pointerEvents: 'none' }}>Inherited</Tag>
+                        <Tag style={{ pointerEvents: "none" }}>Inherited</Tag>
                       ) : null}
                       <Tag
                         color={getTagColor(executionStep.result)}
-                        style={{ pointerEvents: 'none' }}
+                        style={{ pointerEvents: "none" }}
                       >
                         {executionStep.result}
                       </Tag>
@@ -237,11 +237,11 @@ const Executor: React.FunctionComponent<Props> = ({ eid, onFinish }) => {
                   description={`Expected: ${executionStep.expected}`}
                 />
                 {executionStep.inheritedFrom ? (
-                  <Tag style={{ pointerEvents: 'none' }}>Inherited</Tag>
+                  <Tag style={{ pointerEvents: "none" }}>Inherited</Tag>
                 ) : null}
                 <Tag
                   color={getTagColor(executionStep.result)}
-                  style={{ pointerEvents: 'none' }}
+                  style={{ pointerEvents: "none" }}
                 >
                   {executionStep.result}
                 </Tag>

@@ -1,18 +1,18 @@
-import { AxiosResponse } from 'axios';
-import { TestCase, TestStep } from 'sprova-types';
-import agent from './agents/api.agent';
-import axiosErrorHandler from './utils/axiosErrorHandler';
+import { AxiosResponse } from "axios";
+import { TestCase, TestStep } from "sprova-types";
+import agent from "./agents/api.agent";
+import axiosErrorHandler from "./utils/axiosErrorHandler";
 
 export function getTestCases(
   projectId: string,
   cycleId: string
 ): Promise<TestCase[]> {
   return agent
-    .get('/testcases', {
+    .get("/testcases", {
       params: {
         projectId,
-        cycleId,
-      },
+        cycleId
+      }
     })
     .catch(axiosErrorHandler)
     .then(
@@ -48,8 +48,8 @@ export function getTestCaseSteps(
   return agent
     .get(`/testcases/${id}/steps`, {
       params: {
-        resolveInheritance,
-      },
+        resolveInheritance
+      }
     })
     .catch(axiosErrorHandler)
     .then(
@@ -65,7 +65,7 @@ export function getTestCaseSteps(
 
 export function postTestCase(testCase: Partial<TestCase>): Promise<TestCase> {
   return agent
-    .post('/testcases', testCase)
+    .post("/testcases", testCase)
     .catch(axiosErrorHandler)
     .then(
       (response: AxiosResponse): TestCase => {

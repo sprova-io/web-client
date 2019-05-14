@@ -1,14 +1,14 @@
-import { getExecutionContexts } from '@/api/execution-context.api';
-import { PageContent, PageHeader } from '@/components/Layout';
-import Level from '@/components/Level';
-import { ProjectContext } from '@/contexts/ProjectContext';
-import { useFetcher } from '@/hooks/useFetcher';
-import { Alert, Breadcrumb, Button, Col, Divider, Icon, List, Row } from 'antd';
-import _ from 'lodash';
-import React, { Fragment, useContext } from 'react';
-import { Link, RouteComponentProps, withRouter } from 'react-router-dom';
-import { ExecutionContext, ExecutionContextStatus } from 'sprova-types';
-import './ExecutionOverview.scss';
+import { getExecutionContexts } from "@/api/execution-context.api";
+import { PageContent, PageHeader } from "@/components/Layout";
+import Level from "@/components/Level";
+import { ProjectContext } from "@/contexts/ProjectContext";
+import { useFetcher } from "@/hooks/useFetcher";
+import { Alert, Breadcrumb, Button, Col, Divider, Icon, List, Row } from "antd";
+import _ from "lodash";
+import React, { Fragment, useContext } from "react";
+import { Link, RouteComponentProps, withRouter } from "react-router-dom";
+import { ExecutionContext, ExecutionContextStatus } from "sprova-types";
+import "./ExecutionOverview.scss";
 
 interface Params {
   pid: string;
@@ -22,7 +22,7 @@ const ExecutionOverview: React.FunctionComponent<
   const {
     data: executionContexts,
     isLoading: isExecutionContextsLoading,
-    error,
+    error
   } = useFetcher<ExecutionContext[]>(getExecutionContexts, match.params.pid);
 
   const filterContextsByStatus = (status: ExecutionContextStatus) => {
@@ -79,15 +79,15 @@ const ExecutionOverview: React.FunctionComponent<
             >
               <Level>
                 <div>
-                  <div style={{ fontSize: 10, color: 'grey' }}>
+                  <div style={{ fontSize: 10, color: "grey" }}>
                     {executionContext.method}
                     <Divider type="vertical" />
                     {executionContext.type}
                   </div>
                   <span>{executionContext._id}</span>
                 </div>
-                <div style={{ textAlign: 'end' }}>
-                  <div style={{ fontSize: 10, color: 'grey' }}>
+                <div style={{ textAlign: "end" }}>
+                  <div style={{ fontSize: 10, color: "grey" }}>
                     {new Date(executionContext.createdAt).toLocaleString()}
                   </div>
                   <span>5/10</span>

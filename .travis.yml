@@ -1,6 +1,10 @@
 language: node_js
 node_js:
+<<<<<<< HEAD
   - "11.10.1"
+=======
+  - "12"
+>>>>>>> cc1ba30aa3764fa044bb6c4ad6babb8e877765e4
 
 branches:
   only:
@@ -16,4 +20,8 @@ before_script:
 script:
   - yarn build --prod
   - yarn lint
+<<<<<<< HEAD
   - yarn test
+=======
+  - yarn test-coverage
+>>>>>>> cc1ba30aa3764fa044bb6c4ad6babb8e877765e4

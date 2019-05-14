@@ -1,11 +1,11 @@
-import { getExecutionsOfTestCase } from '@/api/execution.api';
-import Card, { CardBody } from '@/components/Card';
-import Table, { TableColumn, TableRow } from '@/components/Table';
-import { useFetcher } from '@/hooks/useFetcher';
-import { Icon, Spin } from 'antd';
-import React from 'react';
-import { RouteComponentProps, withRouter } from 'react-router';
-import { Execution, ExecutionStatus } from 'sprova-types';
+import { getExecutionsOfTestCase } from "@/api/execution.api";
+import Card, { CardBody } from "@/components/Card";
+import Table, { TableColumn, TableRow } from "@/components/Table";
+import { useFetcher } from "@/hooks/useFetcher";
+import { Icon, Spin } from "antd";
+import React from "react";
+import { RouteComponentProps, withRouter } from "react-router";
+import { Execution, ExecutionStatus } from "sprova-types";
 
 interface Params {
   pid: string;
@@ -14,7 +14,7 @@ interface Params {
 
 const ExecutionsTab: React.FunctionComponent<RouteComponentProps<Params>> = ({
   history,
-  match,
+  match
 }) => {
   const { data: executions, isLoading } = useFetcher(
     getExecutionsOfTestCase,
@@ -49,7 +49,7 @@ const ExecutionsTab: React.FunctionComponent<RouteComponentProps<Params>> = ({
     <Card>
       <CardBody padded={false}>
         <Table
-          columnTitles={['Status', 'ID', 'Date']}
+          columnTitles={["Status", "ID", "Date"]}
           data={executions}
           renderRow={(execution: Execution, index: number) => {
             const icon = getStatusIcon(execution.status);

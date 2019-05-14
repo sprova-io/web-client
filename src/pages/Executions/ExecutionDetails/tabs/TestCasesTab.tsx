@@ -1,13 +1,13 @@
-import { getExecutionSteps } from '@/api/execution.api';
-import Level from '@/components/Level';
-import { Alert, Col, Icon, List, Row, Spin, Tag } from 'antd';
-import React, { Fragment, useEffect, useState } from 'react';
+import { getExecutionSteps } from "@/api/execution.api";
+import Level from "@/components/Level";
+import { Alert, Col, Icon, List, Row, Spin, Tag } from "antd";
+import React, { Fragment, useEffect, useState } from "react";
 import {
   Execution,
   ExecutionStatus,
   ExecutionStep,
-  ExecutionStepResult,
-} from 'sprova-types';
+  ExecutionStepResult
+} from "sprova-types";
 
 interface Props {
   executions: Execution[];
@@ -16,7 +16,7 @@ interface Props {
 const TestCasesTab: React.FunctionComponent<Props> = ({ executions }) => {
   const [executionSteps, setExecutionSteps] = useState<ExecutionStep[]>([]);
   const [isExecutionStepsLoading, setIsExecutionStepsLoading] = useState(true);
-  const [error, setError] = useState<string>('');
+  const [error, setError] = useState<string>("");
 
   const [currentStep, setCurrentStep] = useState<ExecutionStep>();
 
@@ -33,16 +33,16 @@ const TestCasesTab: React.FunctionComponent<Props> = ({ executions }) => {
   const getStatusColor = (status: ExecutionStatus): string => {
     switch (status) {
       case ExecutionStatus.Successful: {
-        return '#f6ffed';
+        return "#f6ffed";
       }
       case ExecutionStatus.Warning: {
-        return '#fffbe6';
+        return "#fffbe6";
       }
       case ExecutionStatus.Failed: {
-        return '#fff1f0';
+        return "#fff1f0";
       }
       default: {
-        return 'white';
+        return "white";
       }
     }
   };
@@ -50,16 +50,16 @@ const TestCasesTab: React.FunctionComponent<Props> = ({ executions }) => {
   const getStatusIcon = (status: ExecutionStatus): string => {
     switch (status) {
       case ExecutionStatus.Successful: {
-        return 'check';
+        return "check";
       }
       case ExecutionStatus.Warning: {
-        return 'exclamation';
+        return "exclamation";
       }
       case ExecutionStatus.Failed: {
-        return 'close';
+        return "close";
       }
       default: {
-        return '';
+        return "";
       }
     }
   };
@@ -67,19 +67,19 @@ const TestCasesTab: React.FunctionComponent<Props> = ({ executions }) => {
   const getTagColor = (result: ExecutionStepResult): string => {
     switch (result) {
       case ExecutionStepResult.Successful: {
-        return 'green';
+        return "green";
       }
       case ExecutionStepResult.Failed: {
-        return 'red';
+        return "red";
       }
       case ExecutionStepResult.Pending: {
-        return 'blue';
+        return "blue";
       }
       case ExecutionStepResult.Warning: {
-        return 'orange';
+        return "orange";
       }
       default: {
-        return '';
+        return "";
       }
     }
   };
@@ -91,7 +91,7 @@ const TestCasesTab: React.FunctionComponent<Props> = ({ executions }) => {
   useEffect(() => {
     const fetchData = async () => {
       setIsExecutionStepsLoading(true);
-      setError('');
+      setError("");
 
       try {
         const fetchedData = await getExecutionSteps(currentExecution._id);
@@ -123,10 +123,10 @@ const TestCasesTab: React.FunctionComponent<Props> = ({ executions }) => {
           renderItem={(_execution: Execution) => (
             <List.Item
               style={{
-                backgroundColor: `${getStatusColor(_execution.status)}`,
+                backgroundColor: `${getStatusColor(_execution.status)}`
               }}
               className={`list-item ${
-                _execution._id === currentExecution!._id ? 'selected' : ''
+                _execution._id === currentExecution!._id ? "selected" : ""
               }`}
               onClick={() => handleExecutionSelect(_execution)}
             >
@@ -157,10 +157,10 @@ const TestCasesTab: React.FunctionComponent<Props> = ({ executions }) => {
               currentStep && executionStep.key === currentStep.key ? (
                 <List.Item
                   style={{
-                    display: 'block',
+                    display: "block",
                     paddingBottom: 24,
-                    backgroundColor: 'rgba(0, 0, 0, 0.025)',
-                    overflow: 'hidden',
+                    backgroundColor: "rgba(0, 0, 0, 0.025)",
+                    overflow: "hidden"
                   }}
                 >
                   <Level>
@@ -170,11 +170,11 @@ const TestCasesTab: React.FunctionComponent<Props> = ({ executions }) => {
                     </div>
                     <Fragment>
                       {executionStep.inheritedFrom ? (
-                        <Tag style={{ pointerEvents: 'none' }}>Inherited</Tag>
+                        <Tag style={{ pointerEvents: "none" }}>Inherited</Tag>
                       ) : null}
                       <Tag
                         color={getTagColor(executionStep.result)}
-                        style={{ pointerEvents: 'none' }}
+                        style={{ pointerEvents: "none" }}
                       >
                         {executionStep.result}
                       </Tag>
@@ -195,11 +195,11 @@ const TestCasesTab: React.FunctionComponent<Props> = ({ executions }) => {
                     description={`Expected: ${executionStep.expected}`}
                   />
                   {executionStep.inheritedFrom ? (
-                    <Tag style={{ pointerEvents: 'none' }}>Inherited</Tag>
+                    <Tag style={{ pointerEvents: "none" }}>Inherited</Tag>
                   ) : null}
                   <Tag
                     color={getTagColor(executionStep.result)}
-                    style={{ pointerEvents: 'none' }}
+                    style={{ pointerEvents: "none" }}
                   >
                     {executionStep.result}
                   </Tag>

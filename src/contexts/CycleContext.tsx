@@ -1,11 +1,11 @@
-import { getCycles } from '@/api/cycle.api';
-import { findById } from '@/utils';
-import _ from 'lodash';
-import React, { useContext, useEffect, useState } from 'react';
-import { Cycle } from 'sprova-types';
-import { ProjectContext } from './ProjectContext';
+import { getCycles } from "@/api/cycle.api";
+import { findById } from "@/utils";
+import _ from "lodash";
+import React, { useContext, useEffect, useState } from "react";
+import { Cycle } from "sprova-types";
+import { ProjectContext } from "./ProjectContext";
 
-const CURRENT_CYCLE_ID = 'currentCycleId';
+const CURRENT_CYCLE_ID = "currentCycleId";
 
 interface CycleContext {
   currentCycle: Cycle | null;
@@ -24,7 +24,7 @@ const initialContext: CycleContext = {
   onAddCycle: () => {},
   onRemoveCycle: () => {},
   onSelectCycle: () => {},
-  cycles: [],
+  cycles: []
 };
 
 const CycleContext = React.createContext<CycleContext>(initialContext);
@@ -45,7 +45,7 @@ const CycleProvider: React.FunctionComponent = ({ children }) => {
 
     const fetchCycles = async () => {
       setIsCyclesFetched(false);
-      setError('');
+      setError("");
 
       try {
         const fetchedCycles = await getCycles(currentProject._id);
@@ -96,7 +96,7 @@ const CycleProvider: React.FunctionComponent = ({ children }) => {
         onAddCycle: handleAddCycle,
         onRemoveCycle: handleRemoveCycle,
         onSelectCycle: handleSelectCycle,
-        cycles,
+        cycles
       }}
     >
       {children}

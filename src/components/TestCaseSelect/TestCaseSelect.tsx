@@ -1,13 +1,13 @@
-import Card, { CardBody, CardFooter, CardHeader } from '@/components/Card';
-import Level from '@/components/Level';
-import List from '@/components/List';
-import { TestCaseContext } from '@/contexts/TestCaseContext';
-import { findById } from '@/utils';
-import { Button, Select } from 'antd';
-import * as _ from 'lodash';
-import React, { useContext, useState } from 'react';
-import { TestCase } from 'sprova-types';
-import './TestCaseSelect.scss';
+import Card, { CardBody, CardFooter, CardHeader } from "@/components/Card";
+import Level from "@/components/Level";
+import List from "@/components/List";
+import { TestCaseContext } from "@/contexts/TestCaseContext";
+import { findById } from "@/utils";
+import { Button, Select } from "antd";
+import * as _ from "lodash";
+import React, { useContext, useState } from "react";
+import { TestCase } from "sprova-types";
+import "./TestCaseSelect.scss";
 
 const Option = Select.Option;
 
@@ -22,7 +22,7 @@ const TestCaseSelect: React.FunctionComponent<TestCaseSelectProps> = ({
   onRemoveTestCase,
   onSelectTestCase,
   selectedTestCases,
-  style,
+  style
 }) => {
   const { testCases } = useContext(TestCaseContext);
 
@@ -75,9 +75,9 @@ const TestCaseSelect: React.FunctionComponent<TestCaseSelectProps> = ({
             onChange={handleTestCaseChange}
             optionFilterProp="children"
             style={{
-              display: 'inline-block',
+              display: "inline-block",
               marginRight: 16,
-              width: '100%',
+              width: "100%"
             }}
             value={currentTestCaseId}
           >

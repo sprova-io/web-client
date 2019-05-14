@@ -1,16 +1,16 @@
-import { AxiosResponse } from 'axios';
-import { ExecutionContext, ExecutionContextStatus } from 'sprova-types';
-import agent from './agents/api.agent';
-import axiosErrorHandler from './utils/axiosErrorHandler';
+import { AxiosResponse } from "axios";
+import { ExecutionContext, ExecutionContextStatus } from "sprova-types";
+import agent from "./agents/api.agent";
+import axiosErrorHandler from "./utils/axiosErrorHandler";
 
 export function getExecutionContexts(
   projectId: string
 ): Promise<ExecutionContext[]> {
   return agent
-    .get('/execution-contexts', {
+    .get("/execution-contexts", {
       params: {
-        projectId,
-      },
+        projectId
+      }
     })
     .catch(axiosErrorHandler)
     .then(
@@ -43,7 +43,7 @@ export function postExecutionContext(
   executionContext: Partial<ExecutionContext>
 ): Promise<ExecutionContext> {
   return agent
-    .post('/execution-contexts', executionContext)
+    .post("/execution-contexts", executionContext)
     .catch(axiosErrorHandler)
     .then(
       (response: AxiosResponse): ExecutionContext => {
@@ -62,7 +62,7 @@ export function updateExecutionContextStatus(
 ): Promise<boolean> {
   return agent
     .put(`/execution-contexts/${executionContextId}/status`, {
-      status: executionContextStatus,
+      status: executionContextStatus
     })
     .catch(axiosErrorHandler)
     .then(

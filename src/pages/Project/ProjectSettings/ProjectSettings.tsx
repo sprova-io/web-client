@@ -1,45 +1,40 @@
-import { deleteProject, updateProject } from '@/api/project.api';
-import Card, { CardBody, CardHeader } from '@/components/Card';
-import { PageContent, PageHeader } from '@/components/Layout';
-import Level from '@/components/Level';
-import { ProjectContext } from '@/contexts/ProjectContext';
+import { deleteProject, updateProject } from "@/api/project.api";
+import Card, { CardBody, CardHeader } from "@/components/Card";
+import { PageContent, PageHeader } from "@/components/Layout";
+import Level from "@/components/Level";
+import { ProjectContext } from "@/contexts/ProjectContext";
 import {
   Breadcrumb,
   Button,
   Icon,
   notification,
   Popconfirm,
-  Typography,
-} from 'antd';
-import React, { Fragment, useContext, useState } from 'react';
-import {
-  Link,
-  Redirect,
-  RouteComponentProps,
-  withRouter,
-} from 'react-router-dom';
-import { Project } from 'sprova-types';
+  Typography
+} from "antd";
+import React, { Fragment, useContext, useState } from "react";
+import { Link, RouteComponentProps, withRouter } from "react-router-dom";
+import { Project } from "sprova-types";
 
-import Input from '@/components/Input';
-import { Label } from '@/components/Label';
-import TextArea from '@/components/TextArea';
-import { useFormInput } from '@/hooks/useFormInput';
-import { useFormTextArea } from '@/hooks/useFormTextArea';
+import Input from "@/components/Input";
+import { Label } from "@/components/Label";
+import TextArea from "@/components/TextArea";
+import { useFormInput } from "@/hooks/useFormInput";
+import { useFormTextArea } from "@/hooks/useFormTextArea";
 
 const { Text } = Typography;
 
 const ProjectSettings: React.FunctionComponent<RouteComponentProps> = ({
-  history,
+  history
 }) => {
   const { currentProject } = useContext(ProjectContext);
 
   const {
     value: projectTitle,
-    handleChange: handleProjectTitleChange,
+    handleChange: handleProjectTitleChange
   } = useFormInput(currentProject!.title);
   const {
     value: description,
-    handleChange: handleDescriptionChange,
+    handleChange: handleDescriptionChange
   } = useFormTextArea(currentProject!.description);
 
   const [isLoading, setIsLoading] = useState(false);
@@ -51,16 +46,16 @@ const ProjectSettings: React.FunctionComponent<RouteComponentProps> = ({
       await deleteProject(currentProject!._id);
       setIsDeleteLoading(false);
       notification.success({
-        placement: 'bottomRight',
-        message: `${currentProject!.title} deleted`,
+        placement: "bottomRight",
+        message: `${currentProject!.title} deleted`
       });
-      history.push('/projects');
+      history.push("/projects");
     } catch (error) {
       setIsDeleteLoading(false);
       notification.error({
-        placement: 'bottomRight',
-        message: 'Failed to delete project',
-        description: error,
+        placement: "bottomRight",
+        message: "Failed to delete project",
+        description: error
       });
     }
   };
@@ -69,7 +64,7 @@ const ProjectSettings: React.FunctionComponent<RouteComponentProps> = ({
     const projectNew: Project = {
       ...currentProject!,
       title: projectTitle,
-      description,
+      description
     };
 
     setIsLoading(true);
@@ -78,16 +73,16 @@ const ProjectSettings: React.FunctionComponent<RouteComponentProps> = ({
       await updateProject(projectNew);
       setIsLoading(false);
       notification.success({
-        placement: 'bottomRight',
-        message: 'Project updated',
+        placement: "bottomRight",
+        message: "Project updated"
       });
       history.push(`/projects/${currentProject!._id}`);
     } catch (error) {
       setIsLoading(false);
       notification.error({
-        placement: 'bottomRight',
-        message: 'Failed to update project',
-        description: error,
+        placement: "bottomRight",
+        message: "Failed to update project",
+        description: error
       });
     }
   };
@@ -97,7 +92,7 @@ const ProjectSettings: React.FunctionComponent<RouteComponentProps> = ({
       placement="bottomRight"
       title="Delete this project?"
       onConfirm={deleteRequest}
-      icon={<Icon type="question-circle-o" style={{ color: 'red' }} />}
+      icon={<Icon type="question-circle-o" style={{ color: "red" }} />}
       okText="Yes"
       cancelText="Cancel"
     >

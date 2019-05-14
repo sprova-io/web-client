@@ -1,25 +1,25 @@
-import { logout } from '@/api/auth.api';
-import Card, { CardBody } from '@/components/Card';
-import { PageLoad } from '@/components/Layout';
-import Level from '@/components/Level';
-import { ProjectContext } from '@/contexts/ProjectContext';
-import { UserContext } from '@/contexts/UserContext';
-import { Alert, Button, Divider, Empty, Icon } from 'antd';
-import React, { Fragment, useContext } from 'react';
-import Helmet from 'react-helmet';
-import { Link, RouteComponentProps, withRouter } from 'react-router-dom';
-import { Project } from 'sprova-types';
-import './ProjectList.scss';
+import { logout } from "@/api/auth.api";
+import Card, { CardBody } from "@/components/Card";
+import { PageLoad } from "@/components/Layout";
+import Level from "@/components/Level";
+import { ProjectContext } from "@/contexts/ProjectContext";
+import { UserContext } from "@/contexts/UserContext";
+import { Alert, Button, Divider, Empty, Icon } from "antd";
+import React, { Fragment, useContext } from "react";
+import Helmet from "react-helmet";
+import { Link, RouteComponentProps, withRouter } from "react-router-dom";
+import { Project } from "sprova-types";
+import "./ProjectList.scss";
 
 const ProjectList: React.FunctionComponent<RouteComponentProps> = ({
-  history,
+  history
 }) => {
   const {
     currentProject,
     projects,
     error,
     isProjectsFetched,
-    onSelectProject,
+    onSelectProject
   } = useContext(ProjectContext);
   const { onLogout, user } = useContext(UserContext);
 
@@ -34,7 +34,7 @@ const ProjectList: React.FunctionComponent<RouteComponentProps> = ({
   const signout = () => {
     logout();
     onLogout();
-    history.push('/login');
+    history.push("/login");
   };
 
   return (
@@ -62,16 +62,16 @@ const ProjectList: React.FunctionComponent<RouteComponentProps> = ({
                     key={index}
                     onClick={() => selectProject(project)}
                     style={{ marginBottom: 24 }}
-                    status={isCurrentProject(project) ? 'info' : null}
+                    status={isCurrentProject(project) ? "info" : null}
                   >
                     <CardBody>
                       <h3>{project.title}</h3>
-                      <p>{'No description.'}</p>
+                      <p>{"No description."}</p>
                     </CardBody>
                   </Card>
                 ))
               ) : (
-                <Empty description={'No Projects found'}>
+                <Empty description={"No Projects found"}>
                   <Link to="/projects/new">
                     <Button type="primary">Create New Project</Button>
                   </Link>

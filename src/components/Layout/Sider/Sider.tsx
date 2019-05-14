@@ -1,15 +1,15 @@
-import { logout } from '@/api/auth.api';
-import Menu, { Item, NavItem, Section } from '@/components/Menu';
-import { CycleContext } from '@/contexts/CycleContext';
-import { ProjectContext } from '@/contexts/ProjectContext';
-import { UserContext } from '@/contexts/UserContext';
-import logo from '@/images/sprova.svg';
-import { findById } from '@/utils';
-import { Divider, Icon, Select, Spin } from 'antd';
-import React, { Fragment, useContext } from 'react';
-import { RouteComponentProps, withRouter } from 'react-router-dom';
-import { Cycle } from 'sprova-types';
-import './Sider.scss';
+import { logout } from "@/api/auth.api";
+import Menu, { Item, NavItem, Section } from "@/components/Menu";
+import { CycleContext } from "@/contexts/CycleContext";
+import { ProjectContext } from "@/contexts/ProjectContext";
+import { UserContext } from "@/contexts/UserContext";
+import logo from "@/images/sprova.svg";
+import { findById } from "@/utils";
+import { Divider, Icon, Select, Spin } from "antd";
+import React, { Fragment, useContext } from "react";
+import { RouteComponentProps, withRouter } from "react-router-dom";
+import { Cycle } from "sprova-types";
+import "./Sider.scss";
 
 const Option = Select.Option;
 
@@ -21,13 +21,13 @@ const Sider: React.FunctionComponent<RouteComponentProps> = ({ history }) => {
   const { onLogout, user } = useContext(UserContext);
 
   const changeProject = () => {
-    history.push('/projects');
+    history.push("/projects");
   };
 
   const signout = () => {
     logout();
     onLogout();
-    history.push('/login');
+    history.push("/login");
   };
 
   const handleCycleChange = (cycleId: string) => {
@@ -49,7 +49,7 @@ const Sider: React.FunctionComponent<RouteComponentProps> = ({ history }) => {
       >
         <img id="sprova-logo" src={logo} alt="logo" />
         <h3 id="sprova-project-title">
-          {(currentProject && currentProject.title) || 'Sprova'}
+          {(currentProject && currentProject.title) || "Sprova"}
         </h3>
       </div>
 
@@ -63,12 +63,12 @@ const Sider: React.FunctionComponent<RouteComponentProps> = ({ history }) => {
                 <Item>
                   <Select
                     defaultValue={currentCycle._id}
-                    dropdownRender={(menu) => (
+                    dropdownRender={menu => (
                       <div>
                         {menu}
-                        <Divider style={{ margin: '4px 0' }} />
+                        <Divider style={{ margin: "4px 0" }} />
                         <div
-                          style={{ padding: '8px', cursor: 'pointer' }}
+                          style={{ padding: "8px", cursor: "pointer" }}
                           onClick={() =>
                             history.push(
                               `/projects/${currentProject!._id}/cycles/new`
@@ -80,7 +80,7 @@ const Sider: React.FunctionComponent<RouteComponentProps> = ({ history }) => {
                       </div>
                     )}
                     onChange={handleCycleChange}
-                    style={{ width: '160' }}
+                    style={{ width: "160" }}
                   >
                     {cycles.map((cycle: Cycle) => (
                       <Option key={cycle._id} value={cycle._id}>

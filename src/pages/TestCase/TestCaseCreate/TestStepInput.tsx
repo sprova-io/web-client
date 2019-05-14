@@ -1,29 +1,29 @@
-import Input from '@/components/Input';
-import { useFormInput } from '@/hooks/useFormInput';
-import { Button, Col, Row } from 'antd';
-import React, { useRef } from 'react';
-import { TestStep } from 'sprova-types';
-import './TestCaseCreate.scss';
+import Input from "@/components/Input";
+import { useFormInput } from "@/hooks/useFormInput";
+import { Button, Col, Row } from "antd";
+import React, { useRef } from "react";
+import { TestStep } from "sprova-types";
+import "./TestCaseCreate.scss";
 
 interface TestStepInputProps {
   onAdd: (testStep: TestStep) => void;
 }
 
 const TestStepInput: React.FunctionComponent<TestStepInputProps> = ({
-  onAdd,
+  onAdd
 }) => {
   const actionInputRef = useRef<HTMLInputElement>(null);
 
   const {
     value: action,
     setValue: setAction,
-    handleChange: handleActionChange,
-  } = useFormInput('');
+    handleChange: handleActionChange
+  } = useFormInput("");
   const {
     value: expected,
     setValue: setExpected,
-    handleChange: handleExpectedChange,
-  } = useFormInput('');
+    handleChange: handleExpectedChange
+  } = useFormInput("");
 
   const handleAddTestStep = () => {
     if (!isFormValid()) {
@@ -32,12 +32,12 @@ const TestStepInput: React.FunctionComponent<TestStepInputProps> = ({
 
     const testStep = {
       action,
-      expected,
+      expected
     };
 
     onAdd(testStep);
-    setAction('');
-    setExpected('');
+    setAction("");
+    setExpected("");
 
     if (actionInputRef && actionInputRef.current) {
       actionInputRef.current.focus();

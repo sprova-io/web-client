@@ -1,19 +1,19 @@
-import Card, { CardBody, CardHeader } from '@/components/Card';
-import Input from '@/components/Input';
-import { PageContent, PageHeader } from '@/components/Layout';
-import Level from '@/components/Level';
-import Table, { TableColumn, TableRow } from '@/components/Table';
-import { ProjectContext } from '@/contexts/ProjectContext';
-import { TestCaseContext } from '@/contexts/TestCaseContext';
-import { useFormInput } from '@/hooks/useFormInput';
-import { Breadcrumb, Button, Icon } from 'antd';
-import * as _ from 'lodash';
-import React, { Fragment, useContext } from 'react';
-import { Link, RouteComponentProps, withRouter } from 'react-router-dom';
-import { TestCase } from 'sprova-types';
+import Card, { CardBody, CardHeader } from "@/components/Card";
+import Input from "@/components/Input";
+import { PageContent, PageHeader } from "@/components/Layout";
+import Level from "@/components/Level";
+import Table, { TableColumn, TableRow } from "@/components/Table";
+import { ProjectContext } from "@/contexts/ProjectContext";
+import { TestCaseContext } from "@/contexts/TestCaseContext";
+import { useFormInput } from "@/hooks/useFormInput";
+import { Breadcrumb, Button, Icon } from "antd";
+import * as _ from "lodash";
+import React, { Fragment, useContext } from "react";
+import { Link, RouteComponentProps, withRouter } from "react-router-dom";
+import { TestCase } from "sprova-types";
 
 const TestCaseList: React.FunctionComponent<RouteComponentProps> = ({
-  history,
+  history
 }) => {
   const { currentProject } = useContext(ProjectContext);
   const { testCases, isTestCasesFetched } = useContext(TestCaseContext);
@@ -21,8 +21,8 @@ const TestCaseList: React.FunctionComponent<RouteComponentProps> = ({
   const {
     value: query,
     setValue: setQuery,
-    handleChange: handleQueryChange,
-  } = useFormInput('');
+    handleChange: handleQueryChange
+  } = useFormInput("");
 
   const handleRowClick = (testCase: TestCase) => {
     history.push(`/projects/${currentProject!._id}/testcases/${testCase._id}`);
@@ -33,7 +33,7 @@ const TestCaseList: React.FunctionComponent<RouteComponentProps> = ({
       testCase.title.toLowerCase().includes(_query.toLowerCase())
     );
 
-  const resetQuery = () => setQuery('');
+  const resetQuery = () => setQuery("");
 
   return (
     <Fragment>
@@ -57,7 +57,7 @@ const TestCaseList: React.FunctionComponent<RouteComponentProps> = ({
                 <Input
                   onChange={handleQueryChange}
                   placeholder="Filter"
-                  style={{ display: 'inline-block', width: 250 }}
+                  style={{ display: "inline-block", width: 250 }}
                   value={query}
                 />
                 {query && (
@@ -80,7 +80,7 @@ const TestCaseList: React.FunctionComponent<RouteComponentProps> = ({
           <CardBody padded={false}>
             <Table
               data={filterTestCases(testCases, query)}
-              columnTitles={['Title', 'Description']}
+              columnTitles={["Title", "Description"]}
               renderRow={(testCase: TestCase, index: number) => (
                 <TableRow key={index} onClick={() => handleRowClick(testCase)}>
                   <TableColumn>{testCase.title}</TableColumn>

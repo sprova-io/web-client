@@ -1,18 +1,18 @@
-import { AxiosResponse } from 'axios';
-import decode from 'jwt-decode';
-import { User } from 'sprova-types';
-import { setToken } from './agents/api.agent';
-import authAgent from './agents/auth.agent';
-import axiosErrorHandler from './utils/axiosErrorHandler';
+import { AxiosResponse } from "axios";
+import decode from "jwt-decode";
+import { User } from "sprova-types";
+import { setToken } from "./agents/api.agent";
+import authAgent from "./agents/auth.agent";
+import axiosErrorHandler from "./utils/axiosErrorHandler";
 
 export function authenticate(
   username: string,
   password: string
 ): Promise<User> {
   return authAgent
-    .post('authenticate', {
+    .post("authenticate", {
       password,
-      username,
+      username
     })
     .catch(axiosErrorHandler)
     .then(
@@ -27,7 +27,7 @@ export function authenticate(
     )
     .then(
       (token: string): User => {
-        localStorage.setItem('token', token);
+        localStorage.setItem("token", token);
         setToken(token);
 
         return decode(token) as User;
@@ -37,9 +37,9 @@ export function authenticate(
 
 export function signup(username: string, password: string): Promise<boolean> {
   return authAgent
-    .post('signup', {
+    .post("signup", {
       password,
-      username,
+      username
     })
     .catch(axiosErrorHandler)
     .then(
@@ -54,12 +54,12 @@ export function signup(username: string, password: string): Promise<boolean> {
 }
 
 export function getUser(): User | null {
-  const token = localStorage.getItem('token');
+  const token = localStorage.getItem("token");
   return token ? (decode(token) as User) : null;
 }
 
 export function isAuthenticated(): boolean {
-  const token = localStorage.getItem('token');
+  const token = localStorage.getItem("token");
 
   return !!token && !isTokenExpired(token);
 }
@@ -70,6 +70,6 @@ function isTokenExpired(token: string): boolean {
 }
 
 export function logout(): void {
-  localStorage.removeItem('token');
+  localStorage.removeItem("token");
   setToken(null);
 }

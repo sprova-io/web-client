@@ -1,10 +1,10 @@
-import { formatDuration } from '@/utils/formatDuration';
-import { Card, Col, Progress, Row } from 'antd';
-import Chart from 'chart.js';
-import _ from 'lodash';
-import React, { useEffect } from 'react';
-import { Execution, ExecutionContext, ExecutionStatus } from 'sprova-types';
-import '../ExecutionDetails.scss';
+import { formatDuration } from "@/utils/formatDuration";
+import { Card, Col, Progress, Row } from "antd";
+import Chart from "chart.js";
+import _ from "lodash";
+import React, { useEffect } from "react";
+import { Execution, ExecutionContext, ExecutionStatus } from "sprova-types";
+import "../ExecutionDetails.scss";
 
 interface Props {
   executions: Execution[];
@@ -13,45 +13,45 @@ interface Props {
 
 const OverviewTab: React.FunctionComponent<Props> = ({
   context,
-  executions,
+  executions
 }) => {
   const pieChartCanvas = React.createRef<HTMLCanvasElement>();
 
   useEffect(() => {
     const pieChart = new Chart(pieChartCanvas.current!, {
-      type: 'doughnut',
+      type: "doughnut",
       data: {
-        labels: ['Success', 'Warning', 'Failure'],
+        labels: ["Success", "Warning", "Failure"],
         datasets: [
           {
             data: getExecutionResults(),
-            backgroundColor: ['#52c41a', '#faad14', '#f5222d'],
-            borderWidth: 1,
-          },
-        ],
+            backgroundColor: ["#52c41a", "#faad14", "#f5222d"],
+            borderWidth: 1
+          }
+        ]
       },
       options: {
         legend: {
-          position: 'bottom',
+          position: "bottom",
           labels: {
             boxWidth: 16,
-            padding: 16,
-          },
-        },
-      },
+            padding: 16
+          }
+        }
+      }
     });
   }, [executions]);
 
   const getExecutionResults = (): [number, number, number] => {
     const countByStatus = (status: ExecutionStatus) => {
-      return _.filter(executions, (execution) => execution.status === status)
+      return _.filter(executions, execution => execution.status === status)
         .length;
     };
 
     return [
       countByStatus(ExecutionStatus.Successful),
       countByStatus(ExecutionStatus.Warning),
-      countByStatus(ExecutionStatus.Failed),
+      countByStatus(ExecutionStatus.Failed)
     ];
   };
 
@@ -71,7 +71,7 @@ const OverviewTab: React.FunctionComponent<Props> = ({
 
   const getProgressStatus = () => {
     const progress = getExecutionProgess();
-    return progress < 50 ? 'exception' : progress < 90 ? 'normal' : 'success';
+    return progress < 50 ? "exception" : progress < 90 ? "normal" : "success";
   };
 
   return (
@@ -79,10 +79,10 @@ const OverviewTab: React.FunctionComponent<Props> = ({
       <Col
         span={6}
         style={{
-          display: 'flex',
-          flexDirection: 'column',
-          alignContent: 'stretch',
-          justifyContent: 'space-between',
+          display: "flex",
+          flexDirection: "column",
+          alignContent: "stretch",
+          justifyContent: "space-between"
         }}
       >
         <Card
@@ -100,18 +100,18 @@ const OverviewTab: React.FunctionComponent<Props> = ({
         <Card
           className="ratio-card"
           title="Success Ratio"
-          style={{ height: '100%' }}
+          style={{ height: "100%" }}
         >
           <Progress
             status={getProgressStatus()}
-            format={(percent) => `${percent}%`}
+            format={percent => `${percent}%`}
             type="circle"
             percent={getExecutionProgess()}
           />
         </Card>
       </Col>
       <Col span={9}>
-        <Card title="Test Results" style={{ height: '100%' }}>
+        <Card title="Test Results" style={{ height: "100%" }}>
           <canvas ref={pieChartCanvas} />
         </Card>
       </Col>

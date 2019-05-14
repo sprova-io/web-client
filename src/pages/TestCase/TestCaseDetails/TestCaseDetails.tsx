@@ -1,8 +1,8 @@
-import { deleteTestCase } from '@/api/testcase.api';
-import { PageContent, PageHeader, PageLoad } from '@/components/Layout';
-import { ProjectContext } from '@/contexts/ProjectContext';
-import { TestCaseContext } from '@/contexts/TestCaseContext';
-import { findById } from '@/utils';
+import { deleteTestCase } from "@/api/testcase.api";
+import { PageContent, PageHeader, PageLoad } from "@/components/Layout";
+import { ProjectContext } from "@/contexts/ProjectContext";
+import { TestCaseContext } from "@/contexts/TestCaseContext";
+import { findById } from "@/utils";
 import {
   Breadcrumb,
   Button,
@@ -11,14 +11,14 @@ import {
   notification,
   Popconfirm,
   Row,
-  Tabs,
-} from 'antd';
-import React, { Fragment, useContext, useEffect, useState } from 'react';
-import { Link, RouteComponentProps, withRouter } from 'react-router-dom';
-import { TestCase } from 'sprova-types';
-import CodeGenerationTab from './tabs/CodeGenerationTab';
-import ExecutionsTab from './tabs/ExecutionsTab';
-import OverviewTab from './tabs/OverviewTab';
+  Tabs
+} from "antd";
+import React, { Fragment, useContext, useEffect, useState } from "react";
+import { Link, RouteComponentProps, withRouter } from "react-router-dom";
+import { TestCase } from "sprova-types";
+import CodeGenerationTab from "./tabs/CodeGenerationTab";
+import ExecutionsTab from "./tabs/ExecutionsTab";
+import OverviewTab from "./tabs/OverviewTab";
 
 const TabPane = Tabs.TabPane;
 
@@ -29,12 +29,12 @@ interface Params {
 
 const TestCaseDetails: React.FunctionComponent<RouteComponentProps<Params>> = ({
   history,
-  match,
+  match
 }) => {
   const { currentProject } = useContext(ProjectContext);
   const { testCases, onRemoveTestCase } = useContext(TestCaseContext);
 
-  const [activeTabKey, setActiveTabKey] = useState('overview');
+  const [activeTabKey, setActiveTabKey] = useState("overview");
   const [isDeleteLoading, setIsDeleteLoading] = useState(false);
 
   const [testCase, setTestCase] = useState<TestCase | null>(null);
@@ -46,15 +46,15 @@ const TestCaseDetails: React.FunctionComponent<RouteComponentProps<Params>> = ({
       await deleteTestCase(match.params.tid);
       onRemoveTestCase(testCase!);
       notification.success({
-        placement: 'bottomRight',
-        message: `${testCase!.title} deleted`,
+        placement: "bottomRight",
+        message: `${testCase!.title} deleted`
       });
       history.push(`/projects/${match.params.pid}/testcases`);
     } catch (error) {
       notification.error({
-        placement: 'bottomRight',
-        message: 'Failed to delete test case',
-        description: error,
+        placement: "bottomRight",
+        message: "Failed to delete test case",
+        description: error
       });
     } finally {
       setIsDeleteLoading(false);
@@ -66,7 +66,7 @@ const TestCaseDetails: React.FunctionComponent<RouteComponentProps<Params>> = ({
       key="execute"
       to={{
         pathname: `/projects/${match.params.pid}/executions/setup`,
-        search: `?type=testcases&tid=${match.params.tid}`,
+        search: `?type=testcases&tid=${match.params.tid}`
       }}
       style={{ marginRight: 16 }}
     >
@@ -79,9 +79,9 @@ const TestCaseDetails: React.FunctionComponent<RouteComponentProps<Params>> = ({
 
     if (!_testCase) {
       notification.error({
-        placement: 'bottomRight',
-        message: 'Oops',
-        description: `No Test Case found with ID ${match.params.tid}`,
+        placement: "bottomRight",
+        message: "Oops",
+        description: `No Test Case found with ID ${match.params.tid}`
       });
       history.push(`/projects/${match.params.pid}/testcases`);
       return;
@@ -96,7 +96,7 @@ const TestCaseDetails: React.FunctionComponent<RouteComponentProps<Params>> = ({
       placement="bottomRight"
       title="Delete this test case?"
       onConfirm={handleDeleteTestCase}
-      icon={<Icon type="question-circle-o" style={{ color: 'red' }} />}
+      icon={<Icon type="question-circle-o" style={{ color: "red" }} />}
       okText="Yes"
       cancelText="Cancel"
     >
@@ -120,7 +120,7 @@ const TestCaseDetails: React.FunctionComponent<RouteComponentProps<Params>> = ({
             <Breadcrumb.Item>Test Case</Breadcrumb.Item>
           </Breadcrumb>
         }
-        title={(testCase && testCase.title) || 'Test Case Title'}
+        title={(testCase && testCase.title) || "Test Case Title"}
         extra={[executeButton, deleteButton]}
         tabs={
           <Tabs
@@ -136,11 +136,11 @@ const TestCaseDetails: React.FunctionComponent<RouteComponentProps<Params>> = ({
       <PageContent>
         {!testCase ? (
           <PageLoad />
-        ) : activeTabKey === 'overview' ? (
+        ) : activeTabKey === "overview" ? (
           <OverviewTab testCase={testCase} testCases={testCases} />
-        ) : activeTabKey === 'executions' ? (
+        ) : activeTabKey === "executions" ? (
           <ExecutionsTab />
-        ) : activeTabKey === 'codeGeneration' ? (
+        ) : activeTabKey === "codeGeneration" ? (
           <CodeGenerationTab testCase={testCase} />
         ) : null}
       </PageContent>

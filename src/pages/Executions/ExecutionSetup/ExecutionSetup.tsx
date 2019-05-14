@@ -1,16 +1,16 @@
-import { postExecutionContext } from '@/api/execution-context.api';
-import { postExecutions } from '@/api/execution.api';
-import Card, { CardBody, CardHeader } from '@/components/Card';
-import { PageContent, PageHeader } from '@/components/Layout';
-import Level from '@/components/Level';
-import TestCaseSelect from '@/components/TestCaseSelect/TestCaseSelect';
-import { ProjectContext } from '@/contexts/ProjectContext';
-import { TestCaseContext } from '@/contexts/TestCaseContext';
-import { UserContext } from '@/contexts/UserContext';
-import { Breadcrumb, Button, Checkbox, notification, Select } from 'antd';
-import * as _ from 'lodash';
-import React, { Fragment, useContext, useState } from 'react';
-import { Link, RouteComponentProps, withRouter } from 'react-router-dom';
+import { postExecutionContext } from "@/api/execution-context.api";
+import { postExecutions } from "@/api/execution.api";
+import Card, { CardBody, CardHeader } from "@/components/Card";
+import { PageContent, PageHeader } from "@/components/Layout";
+import Level from "@/components/Level";
+import TestCaseSelect from "@/components/TestCaseSelect/TestCaseSelect";
+import { ProjectContext } from "@/contexts/ProjectContext";
+import { TestCaseContext } from "@/contexts/TestCaseContext";
+import { UserContext } from "@/contexts/UserContext";
+import { Breadcrumb, Button, Checkbox, notification, Select } from "antd";
+import * as _ from "lodash";
+import React, { Fragment, useContext, useState } from "react";
+import { Link, RouteComponentProps, withRouter } from "react-router-dom";
 import {
   Execution,
   ExecutionContext,
@@ -18,9 +18,9 @@ import {
   ExecutionMethod,
   ExecutionStatus,
   ExecutionType,
-  TestCase,
-} from 'sprova-types';
-import './ExecutionSetup.scss';
+  TestCase
+} from "sprova-types";
+import "./ExecutionSetup.scss";
 
 const Option = Select.Option;
 
@@ -29,14 +29,14 @@ interface Params {
 }
 
 const ExecutionSetup: React.FunctionComponent<RouteComponentProps<Params>> = ({
-  history,
+  history
 }) => {
   const { currentProject } = useContext(ProjectContext);
   const { testCases } = useContext(TestCaseContext);
   const { user } = useContext(UserContext);
 
   const [selectedTestCases, setSelectedTestCases] = useState<TestCase[]>([]);
-  const [target, setTarget] = useState<string>('testcases');
+  const [target, setTarget] = useState<string>("testcases");
   const [isExecutionLoading, setIsExecutionLoading] = useState<boolean>(false);
   const [isExecuteWholeCycle, setIsExecuteWholeCycle] = useState<boolean>(
     false
@@ -52,7 +52,7 @@ const ExecutionSetup: React.FunctionComponent<RouteComponentProps<Params>> = ({
 
   const isValidSelection = () =>
     isExecuteWholeCycle ||
-    (target === 'testcases' && selectedTestCases.length > 0);
+    (target === "testcases" && selectedTestCases.length > 0);
 
   const handleStartExecution = async () => {
     const executionContextNew: Partial<ExecutionContext> = {
@@ -60,7 +60,7 @@ const ExecutionSetup: React.FunctionComponent<RouteComponentProps<Params>> = ({
       projectId: currentProject!._id,
       type: ExecutionType.TestCases,
       method: ExecutionMethod.Manual,
-      status: ExecutionContextStatus.Active,
+      status: ExecutionContextStatus.Active
     };
 
     setIsExecutionLoading(true);
@@ -77,24 +77,24 @@ const ExecutionSetup: React.FunctionComponent<RouteComponentProps<Params>> = ({
         return {
           contextId,
           testCaseId: testCase._id,
-          status: ExecutionStatus.Pending,
+          status: ExecutionStatus.Pending
         };
       });
 
       await postExecutions(executions);
       notification.success({
-        placement: 'bottomRight',
-        message: 'Execution started',
-        description: `Execution Context created with ID ${contextId}`,
+        placement: "bottomRight",
+        message: "Execution started",
+        description: `Execution Context created with ID ${contextId}`
       });
       history.push(
         `/projects/${currentProject!._id}/executions/run?contextId=${contextId}`
       );
     } catch (error) {
       notification.error({
-        placement: 'bottomRight',
-        message: 'Failed to start Execution Context',
-        description: error,
+        placement: "bottomRight",
+        message: "Failed to start Execution Context",
+        description: error
       });
     } finally {
       setIsExecutionLoading(false);
@@ -144,7 +144,7 @@ const ExecutionSetup: React.FunctionComponent<RouteComponentProps<Params>> = ({
           </CardBody>
         </Card>
 
-        {!isExecuteWholeCycle && target === 'testcases' ? (
+        {!isExecuteWholeCycle && target === "testcases" ? (
           <TestCaseSelect
             onRemoveTestCase={handleRemoveTestCase}
             onSelectTestCase={handleSelectTestCase}
