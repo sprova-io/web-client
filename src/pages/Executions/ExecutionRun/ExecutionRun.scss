@@ -1,0 +1,17 @@
+.card-no-padding {
+  .ant-card-body {
+    padding: 0;
+  }
+}
+
+.list-item {
+  &.selected {
+    font-weight: bold;
+  }
+}
+
+.execution-progress {
+  .ant-progress-inner {
+    background-color: white;
+  }
+}

@@ -1,0 +1,9 @@
+@import '~styles/variables';
+@import '~styles/mixins';
+
+.sprova-page-load {
+  align-items: center;
+  display: flex;
+  height: 100vh;
+  justify-content: center;
+}

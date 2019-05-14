@@ -1,0 +1,46 @@
+@import '~styles/variables';
+@import '~styles/mixins';
+
+.projects-list-page {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  padding: 48px;
+
+  .projects-list-container {
+    display: flex;
+    flex-direction: column;
+
+    @include screen-xs {
+      width: 100%;
+    }
+
+    @include screen-sm {
+      width: 80%;
+    }
+
+    @include screen-md {
+      width: 60%;
+    }
+
+    @include screen-lg {
+      width: 45%;
+    }
+
+    @include screen-xl {
+      width: 30%;
+    }
+
+    .project-list {
+      height: 100%;
+      overflow-y: auto;
+      padding: $padding-sm;
+    }
+
+    .project-list-footer {
+      flex-grow: 1;
+      margin-top: $margin-lg;
+      text-align: center;
+    }
+  }
+}

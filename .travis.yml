@@ -1,0 +1,19 @@
+language: node_js
+node_js:
+  - "11.10.1"
+
+branches:
+  only:
+    - master
+
+cache:
+  directories:
+    - node_modules
+
+before_script:
+  - yarn install
+
+script:
+  - yarn build --prod
+  - yarn lint
+  - yarn test
