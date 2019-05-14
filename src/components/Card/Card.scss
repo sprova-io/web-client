@@ -1,0 +1,67 @@
+@import '~styles/variables';
+@import '~styles/mixins';
+
+.sprova-card {
+  background-color: $white;
+  border-radius: $radius;
+  box-shadow: $box-shadow;
+  display: block;
+  overflow: hidden;
+  transition: all 0.1s;
+
+  &.is-clickable {
+    &:hover {
+      cursor: pointer;
+      transform: translateY(-1px);
+      box-shadow: $box-shadow-hover;
+    }
+  }
+
+  &-body,
+  &-footer {
+    &.is-padded {
+      padding: $padding-md;
+    }
+
+    &.is-darker {
+      background-color: $background-color-darker;
+    }
+  }
+
+  &-footer {
+    border-top: $border;
+  }
+
+  &-header {
+    border-bottom: $border;
+    padding: $padding-md;
+  }
+
+  &-status-bar {
+    height: $status-bar-height;
+  }
+
+  &.is-error {
+    .sprova-card-status-bar {
+      background-color: $status-color-error;
+    }
+  }
+
+  &.is-info {
+    .sprova-card-status-bar {
+      background-color: $primary-color;
+    }
+  }
+
+  &.is-success {
+    .sprova-card-status-bar {
+      background-color: $status-color-success;
+    }
+  }
+
+  &.is-warning {
+    .sprova-card-status-bar {
+      background-color: $status-color-warning;
+    }
+  }
+}

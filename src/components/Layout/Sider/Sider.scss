@@ -1,0 +1,37 @@
+@import '~styles/variables';
+@import '~styles/mixins';
+
+.sprova-sider {
+  background-color: $primary-color-darker;
+  color: $white;
+  grid-area: sider;
+
+  &-title {
+    align-items: center;
+    background-color: $primary-color-dark;
+    cursor: pointer;
+    display: flex;
+    padding: $padding-md $padding-lg;
+
+    #sprova-logo {
+      display: inline-block;
+      height: calc(#{$sider-title-height} / 2);
+      vertical-align: middle;
+      user-select: none;
+    }
+
+    #sprova-project-title {
+      color: $sider-color-light;
+      display: inline-block;
+      margin-left: $margin-md;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+  }
+
+  &-menu {
+    color: $sider-color;
+    padding: 0 $padding-lg;
+  }
+}

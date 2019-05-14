@@ -1,0 +1,11 @@
+.ratio-card {
+  .ant-card-body {
+    text-align: center;
+
+    .ant-progress-inner {
+      vertical-align: middle;
+      width: 200px !important;
+      height: 200px !important;
+    }
+  }
+}

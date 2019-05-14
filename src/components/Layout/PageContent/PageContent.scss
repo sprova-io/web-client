@@ -1,0 +1,7 @@
+@import '~styles/variables';
+@import '~styles/mixins';
+
+.sprova-page-content {
+  overflow-x: auto;
+  padding: $padding-lg;
+}
