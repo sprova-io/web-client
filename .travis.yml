@@ -16,4 +16,4 @@ before_script:
 script:
   - yarn build --prod
   - yarn lint
-  - yarn test
+  - yarn test-coverage
