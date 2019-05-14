@@ -44,7 +44,7 @@ const OverviewTab: React.FunctionComponent<Props> = ({
 
   const getExecutionResults = (): [number, number, number] => {
     const countByStatus = (status: ExecutionStatus) => {
-      return _.filter(executions, execution => execution.status === status)
+      return _.filter(executions, (execution) => execution.status === status)
         .length;
     };
 
@@ -104,7 +104,7 @@ const OverviewTab: React.FunctionComponent<Props> = ({
         >
           <Progress
             status={getProgressStatus()}
-            format={percent => `${percent}%`}
+            format={(percent) => `${percent}%`}
             type="circle"
             percent={getExecutionProgess()}
           />

@@ -63,7 +63,7 @@ const Sider: React.FunctionComponent<RouteComponentProps> = ({ history }) => {
                 <Item>
                   <Select
                     defaultValue={currentCycle._id}
-                    dropdownRender={menu => (
+                    dropdownRender={(menu) => (
                       <div>
                         {menu}
                         <Divider style={{ margin: "4px 0" }} />

@@ -60,7 +60,7 @@ const TestCaseCreate: React.FunctionComponent<RouteComponentProps<Params>> = ({
   const [testStepsError, setTestStepsError] = useState<string | null>(null);
 
   const handleParentSelect = (parentId: string) => {
-    const parentNew = testCases.find(testCase => testCase._id === parentId);
+    const parentNew = testCases.find((testCase) => testCase._id === parentId);
     setParent(parentNew || null);
 
     if (!parentNew) {
