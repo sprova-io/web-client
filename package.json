@@ -73,5 +73,7 @@
       "^@/(.*)$": "<rootDir>/src/$1"
     }
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "codecov": "^3.4.0"
+  }
 }
