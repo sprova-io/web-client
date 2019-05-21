@@ -1,9 +1,9 @@
 import { getExecutionContext } from '@/api/execution-context.api';
 import { getExecutionsOfContext } from '@/api/execution.api';
-import { PageContent, PageHeader } from '@/components/Layout';
 import Level from '@/components/Level';
 import { ProjectContext } from '@/contexts/ProjectContext';
 import { useFetcher } from '@/hooks/useFetcher';
+import { Page } from '@/layouts/ProjectLayout';
 import { Breadcrumb, Button, Col, Icon, Row, Spin, Tabs, Tooltip } from 'antd';
 import _ from 'lodash';
 import React, { Fragment, useContext, useState } from 'react';
@@ -66,11 +66,7 @@ const ExecutionResult: React.FunctionComponent<RouteComponentProps<Params>> = ({
     }
   }
 
-  return isExecutionContextLoading || isExecutionsLoading ? (
-    <Spin />
-  ) : (
-    <Fragment>
-      <PageHeader
+  /* <PageHeader
         breadcrumb={
           <Breadcrumb>
             <Link to={`/projects/${match.params.pid}`}>
@@ -125,9 +121,12 @@ const ExecutionResult: React.FunctionComponent<RouteComponentProps<Params>> = ({
           </Col>
           <Col style={{ textAlign: 'end' }} />
         </Row>
-      </PageHeader>
-      <PageContent>{content}</PageContent>
-    </Fragment>
+      </PageHeader> */
+
+  return (
+    <Page loading={isExecutionContextLoading || isExecutionsLoading}>
+      {content}
+    </Page>
   );
 };
 

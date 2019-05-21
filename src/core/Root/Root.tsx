@@ -1,6 +1,6 @@
-import PrivateRoute from '@/components/PrivateRoute';
 import { UserProvider } from '@/contexts/UserContext';
 import App from '@/core/App';
+import PrivateRoute from '@/core/PrivateRoute';
 import { Login, Signup } from '@/pages';
 import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';

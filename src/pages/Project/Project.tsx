@@ -1,7 +1,8 @@
-import { Layout, PageLoad } from '@/components/Layout';
+import PageLoad from '@/components/PageLoad';
 import { CycleContext } from '@/contexts/CycleContext';
 import { ProjectContext } from '@/contexts/ProjectContext';
 import { TestCaseContext } from '@/contexts/TestCaseContext';
+import Layout from '@/layouts/ProjectLayout';
 import { Executions, TestCases } from '@/pages';
 import { CycleCreate, CycleDetails, CyclesNotFound } from '@/pages/Cycles';
 import React, { useContext } from 'react';

@@ -1,16 +1,16 @@
 import {
   getExecutionContext,
-  updateExecutionContextStatus
-} from "@/api/execution-context.api";
+  updateExecutionContextStatus,
+} from '@/api/execution-context.api';
 import {
   getExecutionsOfContext,
-  updateExecutionStatus
-} from "@/api/execution.api";
-import { PageContent, PageHeader } from "@/components/Layout";
-import Level from "@/components/Level";
-import { ProjectContext } from "@/contexts/ProjectContext";
-import { useFetcher } from "@/hooks/useFetcher";
-import { parseQuery } from "@/utils";
+  updateExecutionStatus,
+} from '@/api/execution.api';
+import Level from '@/components/Level';
+import { ProjectContext } from '@/contexts/ProjectContext';
+import { useFetcher } from '@/hooks/useFetcher';
+import { Page } from '@/layouts/ProjectLayout';
+import { parseQuery } from '@/utils';
 import {
   Breadcrumb,
   Button,
@@ -21,18 +21,18 @@ import {
   Popconfirm,
   Progress,
   Row,
-  Spin
-} from "antd";
-import _ from "lodash";
-import React, { Fragment, useContext, useState } from "react";
-import { Link, RouteComponentProps, withRouter } from "react-router-dom";
+  Spin,
+} from 'antd';
+import _ from 'lodash';
+import React, { Fragment, useContext, useState } from 'react';
+import { Link, RouteComponentProps, withRouter } from 'react-router-dom';
 import {
   Execution,
   ExecutionContextStatus,
-  ExecutionStatus
-} from "sprova-types";
-import "./ExecutionRun.scss";
-import Executor from "./Executor";
+  ExecutionStatus,
+} from 'sprova-types';
+import './ExecutionRun.scss';
+import Executor from './Executor';
 
 const ButtonGroup = Button.Group;
 
@@ -43,7 +43,7 @@ interface Params {
 const ExecutionRun: React.FunctionComponent<RouteComponentProps<Params>> = ({
   history,
   location,
-  match
+  match,
 }) => {
   const { contextId } = parseQuery(location);
 
@@ -87,7 +87,7 @@ const ExecutionRun: React.FunctionComponent<RouteComponentProps<Params>> = ({
     <Popconfirm
       placement="bottomRight"
       title="Abort this test run?"
-      icon={<Icon type="question-circle-o" style={{ color: "red" }} />}
+      icon={<Icon type="question-circle-o" style={{ color: 'red' }} />}
       okText="Yes"
       cancelText="Cancel"
     >
@@ -103,11 +103,11 @@ const ExecutionRun: React.FunctionComponent<RouteComponentProps<Params>> = ({
 
       const executionNew: Execution = {
         ...currentExecution!,
-        status: executionStatus
+        status: executionStatus,
       };
 
       const index = _.findIndex(executions, {
-        _id: executionNew._id
+        _id: executionNew._id,
       });
 
       executions!.splice(index, 1, executionNew);
@@ -116,9 +116,9 @@ const ExecutionRun: React.FunctionComponent<RouteComponentProps<Params>> = ({
     } catch (error) {
       setIsStatusUpdateLoading(false);
       notification.error({
-        placement: "bottomRight",
-        message: "Failed to update Execution Status",
-        description: error
+        placement: 'bottomRight',
+        message: 'Failed to update Execution Status',
+        description: error,
       });
     }
   };
@@ -133,17 +133,17 @@ const ExecutionRun: React.FunctionComponent<RouteComponentProps<Params>> = ({
       );
       setIsContextUpdateLoading(false);
       notification.success({
-        placement: "bottomRight",
-        message: "Execution finished"
+        placement: 'bottomRight',
+        message: 'Execution finished',
       });
 
       history.push(`/projects/${match.params.pid}/executions/${contextId}`);
     } catch (error) {
       setIsContextUpdateLoading(false);
       notification.error({
-        placement: "bottomRight",
-        message: "Failed to finish Execution",
-        description: error
+        placement: 'bottomRight',
+        message: 'Failed to finish Execution',
+        description: error,
       });
     }
   };
@@ -151,16 +151,16 @@ const ExecutionRun: React.FunctionComponent<RouteComponentProps<Params>> = ({
   const getStatusColor = (status: ExecutionStatus): string => {
     switch (status) {
       case ExecutionStatus.Successful: {
-        return "#f6ffed";
+        return '#f6ffed';
       }
       case ExecutionStatus.Warning: {
-        return "#fffbe6";
+        return '#fffbe6';
       }
       case ExecutionStatus.Failed: {
-        return "#fff1f0";
+        return '#fff1f0';
       }
       default: {
-        return "white";
+        return 'white';
       }
     }
   };
@@ -168,16 +168,16 @@ const ExecutionRun: React.FunctionComponent<RouteComponentProps<Params>> = ({
   const getStatusIcon = (status: ExecutionStatus): string => {
     switch (status) {
       case ExecutionStatus.Successful: {
-        return "check";
+        return 'check';
       }
       case ExecutionStatus.Warning: {
-        return "exclamation";
+        return 'exclamation';
       }
       case ExecutionStatus.Failed: {
-        return "close";
+        return 'close';
       }
       default: {
-        return "";
+        return '';
       }
     }
   };
@@ -223,107 +223,83 @@ const ExecutionRun: React.FunctionComponent<RouteComponentProps<Params>> = ({
     return Math.round((finishedExecutions.length / executions!.length) * 100);
   };
 
-  return isContextLoading || isTestCasesLoading ? (
-    <Spin />
-  ) : (
-    <Fragment>
-      <PageHeader
-        breadcrumb={
-          <Breadcrumb>
-            <Link to={`/projects/${match.params.pid}`}>
-              <Breadcrumb.Item>{currentProject!.title}</Breadcrumb.Item>
-            </Link>
-            <Link to={`/projects/${match.params.pid}/executions`}>
-              <Breadcrumb.Item>Executions</Breadcrumb.Item>
-            </Link>
-            <Breadcrumb.Item>Run</Breadcrumb.Item>
-          </Breadcrumb>
-        }
-        title="Live Execution"
-        subTitle="#51"
-        extra={abortButton}
+  return (
+    <Page loading={isContextLoading || isTestCasesLoading}>
+      <Progress
+        status={getExecutionProgess() < 100 ? 'active' : 'success'}
+        className="execution-progress"
+        style={{ marginBottom: 24 }}
+        percent={getExecutionProgess()}
       />
-      <PageContent>
-        <Progress
-          status={getExecutionProgess() < 100 ? "active" : "success"}
-          className="execution-progress"
-          style={{ marginBottom: 24 }}
-          percent={getExecutionProgess()}
-        />
-        <Row gutter={24}>
-          <Col span={18}>
-            <Level>
-              <span style={{ fontSize: 18 }}>
-                {currentExecution!.testCaseTitle!}
-              </span>
-              <ButtonGroup>
-                <Button
-                  disabled={!hasPrevious()}
-                  onClick={selectPrevious}
-                  type="primary"
-                >
-                  <Icon type="left" />
-                  Previous
-                </Button>
-                <Button
-                  disabled={!hasNext()}
-                  onClick={selectNext}
-                  type="primary"
-                >
-                  Next
-                  <Icon type="right" />
-                </Button>
-              </ButtonGroup>
-            </Level>
-            <Spin spinning={isStatusUpdateLoading}>
-              <Executor
-                eid={currentExecution!._id}
-                onFinish={handleFinishedExecution}
-              />
-            </Spin>
-          </Col>
-          <Col span={6}>
-            <List
-              className="children-list"
-              size="small"
-              header={
-                <Level>
-                  <span>Test Cases</span>
-                </Level>
-              }
-              bordered={true}
-              dataSource={executions}
-              renderItem={(_execution: Execution) => (
-                <List.Item
-                  style={{
-                    backgroundColor: `${getStatusColor(_execution.status)}`
-                  }}
-                  className={`list-item ${
-                    _execution._id === currentExecution!._id ? "selected" : ""
-                  }`}
-                  onClick={() => handleExecutionSelect(_execution)}
-                >
-                  <Level>
-                    <span>{_execution.testCaseTitle}</span>
-                    <Icon type={getStatusIcon(_execution.status)} />
-                  </Level>
-                </List.Item>
-              )}
-              footer={<span>Footer</span>}
+      <Row gutter={24}>
+        <Col span={18}>
+          <Level>
+            <span style={{ fontSize: 18 }}>
+              {currentExecution!.testCaseTitle!}
+            </span>
+            <ButtonGroup>
+              <Button
+                disabled={!hasPrevious()}
+                onClick={selectPrevious}
+                type="primary"
+              >
+                <Icon type="left" />
+                Previous
+              </Button>
+              <Button disabled={!hasNext()} onClick={selectNext} type="primary">
+                Next
+                <Icon type="right" />
+              </Button>
+            </ButtonGroup>
+          </Level>
+          <Spin spinning={isStatusUpdateLoading}>
+            <Executor
+              eid={currentExecution!._id}
+              onFinish={handleFinishedExecution}
             />
-            <Button
-              disabled={hasPendingLeft()}
-              onClick={finishExecutionContext}
-              style={{ marginBottom: 8 }}
-              block={true}
-              type="primary"
-            >
-              Finish
-            </Button>
-          </Col>
-        </Row>
-      </PageContent>
-    </Fragment>
+          </Spin>
+        </Col>
+        <Col span={6}>
+          <List
+            className="children-list"
+            size="small"
+            header={
+              <Level>
+                <span>Test Cases</span>
+              </Level>
+            }
+            bordered={true}
+            dataSource={executions}
+            renderItem={(_execution: Execution) => (
+              <List.Item
+                style={{
+                  backgroundColor: `${getStatusColor(_execution.status)}`,
+                }}
+                className={`list-item ${
+                  _execution._id === currentExecution!._id ? 'selected' : ''
+                }`}
+                onClick={() => handleExecutionSelect(_execution)}
+              >
+                <Level>
+                  <span>{_execution.testCaseTitle}</span>
+                  <Icon type={getStatusIcon(_execution.status)} />
+                </Level>
+              </List.Item>
+            )}
+            footer={<span>Footer</span>}
+          />
+          <Button
+            disabled={hasPendingLeft()}
+            onClick={finishExecutionContext}
+            style={{ marginBottom: 8 }}
+            block={true}
+            type="primary"
+          >
+            Finish
+          </Button>
+        </Col>
+      </Row>
+    </Page>
   );
 };
 

@@ -1,7 +1,8 @@
 @import '~styles/variables';
 @import '~styles/mixins';
 
-.sprova-page-content {
+.sprova-page {
+  grid-area: page;
   overflow-x: auto;
   padding: $padding-lg;
 }
