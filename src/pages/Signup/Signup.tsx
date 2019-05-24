@@ -67,7 +67,7 @@ const Signup: React.FunctionComponent<RouteComponentProps> = ({ history }) => {
   return (
     <Fragment>
       <Helmet>
-        <title>Sprova | Sign Up</title>
+        <title>Sign Up</title>
       </Helmet>
       <div className="signup-page">
         <div className="signup-container">

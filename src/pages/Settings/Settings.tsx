@@ -5,7 +5,7 @@ const Settings: React.FunctionComponent = () => {
   return (
     <Fragment>
       <Helmet>
-        <title>Sprova | Settings</title>
+        <title>Settings</title>
       </Helmet>
       <div>Settings</div>
     </Fragment>

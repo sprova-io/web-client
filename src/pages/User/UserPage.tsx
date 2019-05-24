@@ -7,7 +7,7 @@ const UserPage: React.FunctionComponent = () => {
   return (
     <Fragment>
       <Helmet>
-        <title>Sprova | {(user && user.username) || 'User'}</title>
+        <title>{(user && user.username) || 'User'}</title>
       </Helmet>
       <div>UserPage</div>
     </Fragment>

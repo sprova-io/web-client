@@ -40,7 +40,7 @@ const ProjectList: React.FunctionComponent<RouteComponentProps> = ({
   return (
     <Fragment>
       <Helmet>
-        <title>Sprova | Projects</title>
+        <title>Projects</title>
       </Helmet>
       {isProjectsFetched ? (
         <div className="projects-list-page">

@@ -63,7 +63,7 @@ const ProjectCreate: React.FunctionComponent<RouteComponentProps> = ({
   return (
     <Page subTitle="" title="Create New Project">
       <Helmet>
-        <title>Sprova | Create Project</title>
+        <title>New Project</title>
       </Helmet>
       <Card style={{ marginBottom: 24 }}>
         <CardHeader>
