@@ -72,7 +72,7 @@ const CycleProvider: React.FunctionComponent = ({ children }) => {
     };
 
     fetchCycles();
-  }, [currentProject]);
+  }, [currentProject, isProjectsFetched]);
 
   const findCurrentCycle = (_cycles: Cycle[]): Cycle | null => {
     if (!_cycles || _cycles.length === 0) {
