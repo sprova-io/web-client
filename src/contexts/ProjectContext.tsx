@@ -13,7 +13,7 @@ interface ProjectContext {
   onSelectProject: (project: Project | null) => void;
   onRemoveProject: (project: Project) => void;
   onAddProject: (project: Project) => void;
-  projects: Project[];
+  projects: Project[] | null;
 }
 
 const initialContext: ProjectContext = {
@@ -23,7 +23,7 @@ const initialContext: ProjectContext = {
   onAddProject: () => {},
   onRemoveProject: () => {},
   onSelectProject: () => {},
-  projects: [],
+  projects: null,
 };
 
 const ProjectContext = React.createContext<ProjectContext>(initialContext);
@@ -32,7 +32,7 @@ const ProjectProvider: React.FunctionComponent = ({ children }) => {
   const [currentProject, setCurrentProject] = useState<Project | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [isProjectsFetched, setIsProjectsFetched] = useState<boolean>(false);
-  const [projects, setProjects] = useState<Project[]>([]);
+  const [projects, setProjects] = useState<Project[] | null>(null);
 
   useEffect(() => {
     const fetchProjects = async () => {
@@ -67,7 +67,7 @@ const ProjectProvider: React.FunctionComponent = ({ children }) => {
   };
 
   const handleAddProject = (project: Project) => {
-    setProjects([...projects, project]);
+    setProjects([...(projects || []), project]);
   };
 
   const handleRemoveProject = (project: Project) => {

@@ -5,22 +5,45 @@ import { TestCaseContext } from '@/contexts/TestCaseContext';
 import Layout from '@/layouts/ProjectLayout';
 import { Executions, TestCases } from '@/pages';
 import { CycleCreate, CycleDetails, CyclesNotFound } from '@/pages/Cycles';
-import React, { useContext } from 'react';
+import { findById } from '@/utils';
+import React, { useContext, useEffect } from 'react';
 import Helmet from 'react-helmet';
-import { Redirect, Route, Switch } from 'react-router-dom';
+import {
+  Redirect,
+  Route,
+  RouteComponentProps,
+  Switch,
+  withRouter,
+} from 'react-router-dom';
 import ProjectSettings from './ProjectSettings';
 
-const ProjectPage: React.FunctionComponent = () => {
-  const { currentProject, isProjectsFetched } = useContext(ProjectContext);
+interface Params {
+  pid: string;
+}
+
+const ProjectPage: React.FunctionComponent<RouteComponentProps<Params>> = ({
+  history,
+  match,
+}) => {
+  const { currentProject, isProjectsFetched, projects } = useContext(
+    ProjectContext
+  );
   const { currentCycle, isCyclesFetched } = useContext(CycleContext);
   const { isTestCasesFetched } = useContext(TestCaseContext);
+
+  useEffect(() => {
+    if (projects && match.params.pid) {
+      const project = findById(projects, match.params.pid);
+      if (!project) {
+        history.push('/projects');
+      }
+    }
+  }, [match.params.pid, projects]);
 
   return (
     <Layout>
       <Helmet>
-        <title>
-          Sprova | {(currentProject && currentProject.title) || 'Project'}
-        </title>
+        <title>{(currentProject && currentProject.title) || 'Project'}</title>
       </Helmet>
       {!(isProjectsFetched && isCyclesFetched) ? (
         <PageLoad />
@@ -51,4 +74,4 @@ const ProjectPage: React.FunctionComponent = () => {
   );
 };
 
-export default ProjectPage;
+export default withRouter(ProjectPage);
