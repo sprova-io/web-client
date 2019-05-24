@@ -7,10 +7,6 @@ import { ProjectContext } from '@/contexts/ProjectContext';
 import { TestCaseContext } from '@/contexts/TestCaseContext';
 import { UserContext } from '@/contexts/UserContext';
 import { Page } from '@/layouts/ProjectLayout';
-import { Breadcrumb, Button, Checkbox, notification, Select } from 'antd';
-import * as _ from 'lodash';
-import React, { Fragment, useContext, useState } from 'react';
-import { Link, RouteComponentProps, withRouter } from 'react-router-dom';
 import {
   Execution,
   ExecutionContext,
@@ -19,7 +15,11 @@ import {
   ExecutionStatus,
   ExecutionType,
   TestCase,
-} from 'sprova-types';
+} from '@/models';
+import { Breadcrumb, Button, Checkbox, notification, Select } from 'antd';
+import * as _ from 'lodash';
+import React, { Fragment, useContext, useState } from 'react';
+import { Link, RouteComponentProps, withRouter } from 'react-router-dom';
 import './ExecutionSetup.scss';
 
 const Option = Select.Option;

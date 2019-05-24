@@ -1,14 +1,14 @@
-import { AxiosResponse } from "axios";
-import { Execution, ExecutionStatus, ExecutionStep } from "sprova-types";
-import agent from "./agents/api.agent";
-import axiosErrorHandler from "./utils/axiosErrorHandler";
+import { Execution, ExecutionStatus, ExecutionStep } from '@/models';
+import { AxiosResponse } from 'axios';
+import agent from './agents/api.agent';
+import axiosErrorHandler from './utils/axiosErrorHandler';
 
 export function getExecutions(projectId: string): Promise<Execution[]> {
   return agent
-    .get("/executions", {
+    .get('/executions', {
       params: {
-        projectId
-      }
+        projectId,
+      },
     })
     .catch(axiosErrorHandler)
     .then(
@@ -42,11 +42,11 @@ export function getExecutionsOfContext(
   withTitle = false
 ): Promise<Execution[]> {
   return agent
-    .get("/executions", {
+    .get('/executions', {
       params: {
         contextId,
-        withTitle
-      }
+        withTitle,
+      },
     })
     .catch(axiosErrorHandler)
     .then(
@@ -64,10 +64,10 @@ export function getExecutionsOfTestCase(
   testCaseId: string
 ): Promise<Execution[]> {
   return agent
-    .get("/executions", {
+    .get('/executions', {
       params: {
-        testCaseId
-      }
+        testCaseId,
+      },
     })
     .catch(axiosErrorHandler)
     .then(
@@ -100,7 +100,7 @@ export function getExecutionSteps(
 
 export function postExecution(execution: Partial<Execution>) {
   return agent
-    .post("/executions", execution)
+    .post('/executions', execution)
     .catch(axiosErrorHandler)
     .then(
       (response: AxiosResponse): Execution => {
@@ -169,7 +169,7 @@ export function updateExecutionSteps(
 
 export function postExecutions(executions: Array<Partial<Execution>>) {
   return agent
-    .post("/executions", executions)
+    .post('/executions', executions)
     .catch(axiosErrorHandler)
     .then(
       (response: AxiosResponse): Execution[] => {

@@ -1,14 +1,14 @@
-import { AxiosResponse } from "axios";
-import { Cycle } from "sprova-types";
-import agent from "./agents/api.agent";
-import axiosErrorHandler from "./utils/axiosErrorHandler";
+import { Cycle } from '@/models';
+import { AxiosResponse } from 'axios';
+import agent from './agents/api.agent';
+import axiosErrorHandler from './utils/axiosErrorHandler';
 
 export function getCycles(projectId: string): Promise<Cycle[]> {
   return agent
-    .get("/cycles", {
+    .get('/cycles', {
       params: {
-        projectId
-      }
+        projectId,
+      },
     })
     .catch(axiosErrorHandler)
     .then(
@@ -39,7 +39,7 @@ export function getCycle(id: string): Promise<Cycle> {
 
 export function postCycle(cycle: Partial<Cycle>) {
   return agent
-    .post("/cycles", cycle)
+    .post('/cycles', cycle)
     .catch(axiosErrorHandler)
     .then(
       (response: AxiosResponse): Cycle => {

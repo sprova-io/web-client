@@ -3,12 +3,12 @@ import Level from '@/components/Level';
 import { CycleContext } from '@/contexts/CycleContext';
 import { ProjectContext } from '@/contexts/ProjectContext';
 import { UserContext } from '@/contexts/UserContext';
+import { Cycle } from '@/models';
 import { findById } from '@/utils';
 import { Button, Dropdown, Icon, Menu, Select } from 'antd';
 import React, { Fragment, useContext } from 'react';
 import { RouteComponentProps, withRouter } from 'react-router';
 import { Link } from 'react-router-dom';
-import { Cycle } from 'sprova-types';
 import './Header.scss';
 
 const Option = Select.Option;

@@ -6,11 +6,11 @@ import { ProjectContext } from '@/contexts/ProjectContext';
 import { TestCaseContext } from '@/contexts/TestCaseContext';
 import { useFormInput } from '@/hooks/useFormInput';
 import { Page } from '@/layouts/ProjectLayout';
+import { TestCase } from '@/models';
 import { Breadcrumb, Button, Icon } from 'antd';
 import * as _ from 'lodash';
 import React, { Fragment, useContext } from 'react';
 import { Link, RouteComponentProps, withRouter } from 'react-router-dom';
-import { TestCase } from 'sprova-types';
 
 const TestCaseList: React.FunctionComponent<RouteComponentProps> = ({
   history,

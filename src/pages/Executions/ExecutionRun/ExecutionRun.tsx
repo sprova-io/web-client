@@ -10,6 +10,7 @@ import Level from '@/components/Level';
 import { ProjectContext } from '@/contexts/ProjectContext';
 import { useFetcher } from '@/hooks/useFetcher';
 import { Page } from '@/layouts/ProjectLayout';
+import { Execution, ExecutionContextStatus, ExecutionStatus } from '@/models';
 import { parseQuery } from '@/utils';
 import {
   Breadcrumb,
@@ -26,11 +27,6 @@ import {
 import _ from 'lodash';
 import React, { Fragment, useContext, useState } from 'react';
 import { Link, RouteComponentProps, withRouter } from 'react-router-dom';
-import {
-  Execution,
-  ExecutionContextStatus,
-  ExecutionStatus,
-} from 'sprova-types';
 import './ExecutionRun.scss';
 import Executor from './Executor';
 

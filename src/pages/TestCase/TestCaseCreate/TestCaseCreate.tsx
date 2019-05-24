@@ -10,11 +10,11 @@ import { TestCaseContext } from '@/contexts/TestCaseContext';
 import { useFormInput } from '@/hooks/useFormInput';
 import { useFormTextArea } from '@/hooks/useFormTextArea';
 import { Page } from '@/layouts/ProjectLayout';
+import { TestCase, TestStep } from '@/models';
 import { Button, Icon, notification, Select, Switch, Tag, Tooltip } from 'antd';
 import * as _ from 'lodash';
 import React, { useContext, useEffect, useState } from 'react';
 import { RouteComponentProps, withRouter } from 'react-router-dom';
-import { TestCase, TestStep } from 'sprova-types';
 import './TestCaseCreate.scss';
 import TestStepInput from './TestStepInput';
 

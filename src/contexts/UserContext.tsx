@@ -1,6 +1,6 @@
-import { getUser } from "@/api/auth.api";
-import React, { useState } from "react";
-import { User } from "sprova-types";
+import { getUser } from '@/api/auth.api';
+import { User } from '@/models';
+import React, { useState } from 'react';
 
 interface UserContext {
   user: User | null;
@@ -11,7 +11,7 @@ interface UserContext {
 const initialContext: UserContext = {
   user: null,
   onLogin: () => {},
-  onLogout: () => {}
+  onLogout: () => {},
 };
 
 const UserContext = React.createContext<UserContext>(initialContext);
@@ -32,7 +32,7 @@ const UserProvider: React.FunctionComponent = ({ children }) => {
       value={{
         user: currentUser,
         onLogin: handleLogin,
-        onLogout: handleLogout
+        onLogout: handleLogout,
       }}
     >
       {children}

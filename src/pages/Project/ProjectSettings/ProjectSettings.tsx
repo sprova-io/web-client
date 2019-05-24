@@ -8,10 +8,10 @@ import { ProjectContext } from '@/contexts/ProjectContext';
 import { useFormInput } from '@/hooks/useFormInput';
 import { useFormTextArea } from '@/hooks/useFormTextArea';
 import { Page } from '@/layouts/ProjectLayout';
+import { Project } from '@/models';
 import { Button, Icon, notification, Popconfirm, Typography } from 'antd';
 import React, { useContext, useState } from 'react';
 import { RouteComponentProps, withRouter } from 'react-router-dom';
-import { Project } from 'sprova-types';
 
 const { Text } = Typography;
 

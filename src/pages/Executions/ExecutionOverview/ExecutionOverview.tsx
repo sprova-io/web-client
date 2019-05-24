@@ -2,11 +2,11 @@ import { getExecutionContexts } from '@/api/execution-context.api';
 import Level from '@/components/Level';
 import { useFetcher } from '@/hooks/useFetcher';
 import { Page } from '@/layouts/ProjectLayout';
+import { ExecutionContext, ExecutionContextStatus } from '@/models';
 import { Alert, Col, Divider, Icon, List, Row } from 'antd';
 import _ from 'lodash';
 import React from 'react';
 import { Link, RouteComponentProps, withRouter } from 'react-router-dom';
-import { ExecutionContext, ExecutionContextStatus } from 'sprova-types';
 import './ExecutionOverview.scss';
 
 interface Params {

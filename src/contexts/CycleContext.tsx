@@ -1,8 +1,8 @@
 import { getCycles } from '@/api/cycle.api';
+import { Cycle } from '@/models';
 import { findById } from '@/utils';
 import _ from 'lodash';
 import React, { useContext, useEffect, useState } from 'react';
-import { Cycle } from 'sprova-types';
 import { ProjectContext } from './ProjectContext';
 
 const CURRENT_CYCLE_ID = 'currentCycleId';

@@ -1,9 +1,9 @@
-import { getTestCases } from "@/api/testcase.api";
-import _ from "lodash";
-import React, { useContext, useEffect, useState } from "react";
-import { TestCase } from "sprova-types";
-import { CycleContext } from "./CycleContext";
-import { ProjectContext } from "./ProjectContext";
+import { getTestCases } from '@/api/testcase.api';
+import { TestCase } from '@/models';
+import _ from 'lodash';
+import React, { useContext, useEffect, useState } from 'react';
+import { CycleContext } from './CycleContext';
+import { ProjectContext } from './ProjectContext';
 
 interface TestCaseContext {
   error: string | null;
@@ -18,7 +18,7 @@ const initialContext: TestCaseContext = {
   isTestCasesFetched: false,
   onAddTestCase: () => {},
   onRemoveTestCase: () => {},
-  testCases: []
+  testCases: [],
 };
 
 const TestCaseContext = React.createContext<TestCaseContext>(initialContext);
@@ -39,7 +39,7 @@ const TestCaseProvider: React.FunctionComponent = ({ children }) => {
 
     const fetchCycles = async () => {
       setIsTestCasesFetched(false);
-      setError("");
+      setError('');
 
       try {
         const fetchedTestCases = await getTestCases(
@@ -72,7 +72,7 @@ const TestCaseProvider: React.FunctionComponent = ({ children }) => {
         isTestCasesFetched,
         onAddTestCase: handleAddTestCase,
         onRemoveTestCase: handleRemoveTestCase,
-        testCases
+        testCases,
       }}
     >
       {children}

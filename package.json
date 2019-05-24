@@ -44,7 +44,6 @@
     "react-test-renderer": "^16.8.4",
     "react-transition-group": "^4.0.0",
     "sinon": "^7.3.2",
-    "sprova-types": "^1.0.0",
     "tslint": "^5.13.1",
     "tslint-config-prettier": "^1.18.0",
     "tslint-config-standard": "^8.0.1",

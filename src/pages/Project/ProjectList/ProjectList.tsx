@@ -4,11 +4,11 @@ import Level from '@/components/Level';
 import PageLoad from '@/components/PageLoad';
 import { ProjectContext } from '@/contexts/ProjectContext';
 import { UserContext } from '@/contexts/UserContext';
+import { Project } from '@/models';
 import { Alert, Button, Divider, Empty, Icon } from 'antd';
 import React, { Fragment, useContext } from 'react';
 import Helmet from 'react-helmet';
 import { Link, RouteComponentProps, withRouter } from 'react-router-dom';
-import { Project } from 'sprova-types';
 import './ProjectList.scss';
 
 const ProjectList: React.FunctionComponent<RouteComponentProps> = ({

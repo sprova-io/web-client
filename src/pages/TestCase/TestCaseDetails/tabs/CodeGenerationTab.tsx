@@ -1,9 +1,9 @@
-import { Tabs } from "antd";
-import { TestCase } from "sprova-types";
+import { TestCase } from '@/models';
+import { Tabs } from 'antd';
 const TabPane = Tabs.TabPane;
-import React from "react";
-import { RouteComponentProps, withRouter } from "react-router";
-import CodeDetails from "./CodeDetails";
+import React from 'react';
+import { RouteComponentProps, withRouter } from 'react-router';
+import CodeDetails from './CodeDetails';
 
 interface Params {
   pid: string;
@@ -17,7 +17,7 @@ interface Props extends RouteComponentProps<Params> {
 const OverviewTab: React.FunctionComponent<Props> = ({
   history,
   match,
-  testCase
+  testCase,
 }) => {
   return (
     <Tabs defaultActiveKey="1" type="line" tabPosition="right">

@@ -1,7 +1,7 @@
-import { AxiosResponse } from "axios";
-import { Project } from "sprova-types";
-import agent from "./agents/api.agent";
-import axiosErrorHandler from "./utils/axiosErrorHandler";
+import { Project } from '@/models';
+import { AxiosResponse } from 'axios';
+import agent from './agents/api.agent';
+import axiosErrorHandler from './utils/axiosErrorHandler';
 
 export interface QueryParams {
   limit?: number;
@@ -11,7 +11,7 @@ export interface QueryParams {
 
 export async function getProjects(params?: QueryParams): Promise<Project[]> {
   return agent
-    .get("/projects", { params })
+    .get('/projects', { params })
     .catch(axiosErrorHandler)
     .then(
       (response: AxiosResponse): Project[] => {
@@ -41,7 +41,7 @@ export function getProject(projectId: string): Promise<Project> {
 
 export function postProject(project: Partial<Project>) {
   return agent
-    .post("/projects", project)
+    .post('/projects', project)
     .catch(axiosErrorHandler)
     .then(
       (response: AxiosResponse): Project => {

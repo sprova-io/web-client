@@ -1,10 +1,10 @@
-import { getProjects } from "@/api/project.api";
-import { findById } from "@/utils";
-import _ from "lodash";
-import React, { useEffect, useState } from "react";
-import { Project } from "sprova-types";
+import { getProjects } from '@/api/project.api';
+import { Project } from '@/models';
+import { findById } from '@/utils';
+import _ from 'lodash';
+import React, { useEffect, useState } from 'react';
 
-export const CURRENT_PROJECT_ID = "currentProjectId";
+export const CURRENT_PROJECT_ID = 'currentProjectId';
 
 interface ProjectContext {
   currentProject: Project | null;
@@ -23,7 +23,7 @@ const initialContext: ProjectContext = {
   onAddProject: () => {},
   onRemoveProject: () => {},
   onSelectProject: () => {},
-  projects: []
+  projects: [],
 };
 
 const ProjectContext = React.createContext<ProjectContext>(initialContext);
@@ -37,7 +37,7 @@ const ProjectProvider: React.FunctionComponent = ({ children }) => {
   useEffect(() => {
     const fetchProjects = async () => {
       setIsProjectsFetched(false);
-      setError("");
+      setError('');
 
       try {
         const fetchedProjects = await getProjects();
@@ -92,7 +92,7 @@ const ProjectProvider: React.FunctionComponent = ({ children }) => {
         onAddProject: handleAddProject,
         onRemoveProject: handleRemoveProject,
         onSelectProject: handleSelectProject,
-        projects
+        projects,
       }}
     >
       {children}

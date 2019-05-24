@@ -1,5 +1,5 @@
-import { TestCase, TestStep } from "sprova-types";
-import { findById } from "./findById";
+import { TestCase, TestStep } from '@/models';
+import { findById } from './findById';
 
 /**
  * Resolve inherited test steps of the given test case.

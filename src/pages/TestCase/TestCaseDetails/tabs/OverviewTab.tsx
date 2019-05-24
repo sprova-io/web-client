@@ -1,12 +1,13 @@
-import { getTestCaseSteps, updateTestCase } from "@/api/testcase.api";
-import Card, { CardBody, CardHeader } from "@/components/Card";
-import { Label } from "@/components/Label";
-import Level from "@/components/Level";
-import List from "@/components/List";
-import Table, { TableColumn, TableRow } from "@/components/Table";
-import TextArea from "@/components/TextArea";
-import { useFormTextArea } from "@/hooks/useFormTextArea";
-import { findById, findChildren } from "@/utils";
+import { getTestCaseSteps, updateTestCase } from '@/api/testcase.api';
+import Card, { CardBody, CardHeader } from '@/components/Card';
+import { Label } from '@/components/Label';
+import Level from '@/components/Level';
+import List from '@/components/List';
+import Table, { TableColumn, TableRow } from '@/components/Table';
+import TextArea from '@/components/TextArea';
+import { useFormTextArea } from '@/hooks/useFormTextArea';
+import { TestCase, TestStep } from '@/models';
+import { findById, findChildren } from '@/utils';
 import {
   Alert,
   Col,
@@ -16,11 +17,10 @@ import {
   Switch,
   Tag,
   Tooltip,
-  Typography
-} from "antd";
-import React, { useEffect, useState } from "react";
-import { RouteComponentProps, withRouter } from "react-router";
-import { TestCase, TestStep } from "sprova-types";
+  Typography,
+} from 'antd';
+import React, { useEffect, useState } from 'react';
+import { RouteComponentProps, withRouter } from 'react-router';
 
 const Text = Typography.Text;
 
@@ -38,16 +38,16 @@ const OverviewTab: React.FunctionComponent<Props> = ({
   history,
   match,
   testCase,
-  testCases
+  testCases,
 }) => {
   const {
     value: description,
     setValue: setDescription,
-    handleChange: handleDescriptionChange
+    handleChange: handleDescriptionChange,
   } = useFormTextArea(testCase.description);
   const [isDescriptionEditable, setIsDescriptionEditable] = useState(false);
   const [isDescriptionLoading, setIsDescriptionLoading] = useState(false);
-  const [descriptionError, setDescriptionError] = useState("");
+  const [descriptionError, setDescriptionError] = useState('');
 
   const [showInherited, setShowInherited] = useState(false);
 
@@ -69,13 +69,13 @@ const OverviewTab: React.FunctionComponent<Props> = ({
     try {
       const ok = await updateTestCase({ ...testCase, description });
       if (!ok) {
-        throw new Error("Response not ok");
+        throw new Error('Response not ok');
       }
       testCase.description = description;
       setIsDescriptionEditable(false);
     } catch (error) {
       setDescriptionError(error);
-      setTimeout(() => setDescriptionError(""), 3000);
+      setTimeout(() => setDescriptionError(''), 3000);
     } finally {
       setIsDescriptionLoading(false);
     }
@@ -168,13 +168,13 @@ const OverviewTab: React.FunctionComponent<Props> = ({
 
             <Label text="Test Case ID" style={{ marginBottom: 16 }}>
               <Text copyable={true} ellipsis={false}>
-                {(testCase && testCase._id) || "Test Case ID"}
+                {(testCase && testCase._id) || 'Test Case ID'}
               </Text>
             </Label>
 
             <Label text="Created At" style={{ marginBottom: 16 }}>
               {(testCase && new Date(testCase.createdAt).toDateString()) ||
-                "Date"}
+                'Date'}
             </Label>
 
             <Spin spinning={isDescriptionLoading}>
@@ -256,10 +256,10 @@ const OverviewTab: React.FunctionComponent<Props> = ({
           </CardHeader>
           <CardBody padded={false}>
             <Table
-              columnTitles={["#", "Action", "Expected", "Inherited From", ""]}
+              columnTitles={['#', 'Action', 'Expected', 'Inherited From', '']}
               data={[
                 ...(showInherited ? inheritedSteps : []),
-                ...testCase.steps
+                ...testCase.steps,
               ]}
               empty="No Test Steps."
               renderRow={(testStep: TestStep, index: number) => (
