@@ -87,10 +87,14 @@ const CycleProvider: React.FunctionComponent = ({ children }) => {
 
   const handleAddCycle = (cycle: Cycle) => {
     setCycles([...cycles, cycle]);
+    handleSelectCycle(cycle);
   };
 
   const handleRemoveCycle = (cycle: Cycle) => {
     setCycles(_.without(cycles, cycle));
+    if (cycle === currentCycle) {
+      handleSelectCycle(null);
+    }
   };
 
   const handleSelectCycle = (cycle: Cycle | null) => {

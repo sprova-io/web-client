@@ -43,7 +43,6 @@ const CycleCreate: React.FunctionComponent<RouteComponentProps> = ({
       const cycle = await postCycle(cycleNew);
       setIsLoading(false);
       onAddCycle(cycle);
-      onSelectCycle(cycle);
       notification.success({
         placement: 'bottomRight',
         message: `${cycle.title} created`,

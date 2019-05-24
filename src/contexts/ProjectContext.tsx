@@ -72,7 +72,9 @@ const ProjectProvider: React.FunctionComponent = ({ children }) => {
 
   const handleRemoveProject = (project: Project) => {
     setProjects(_.without(projects, project));
-    handleSelectProject(null);
+    if (project === currentProject) {
+      handleSelectProject(null);
+    }
   };
 
   const handleSelectProject = (project: Project | null) => {
