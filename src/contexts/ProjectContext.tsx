@@ -13,7 +13,7 @@ interface ProjectContext {
   onSelectProject: (project: Project | null) => void;
   onRemoveProject: (project: Project) => void;
   onAddProject: (project: Project) => void;
-  projects: Project[] | null;
+  projects: Project[];
 }
 
 const initialContext: ProjectContext = {
@@ -23,7 +23,7 @@ const initialContext: ProjectContext = {
   onAddProject: () => {},
   onRemoveProject: () => {},
   onSelectProject: () => {},
-  projects: null,
+  projects: [],
 };
 
 const ProjectContext = React.createContext<ProjectContext>(initialContext);
@@ -32,7 +32,7 @@ const ProjectProvider: React.FunctionComponent = ({ children }) => {
   const [currentProject, setCurrentProject] = useState<Project | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [isProjectsFetched, setIsProjectsFetched] = useState<boolean>(false);
-  const [projects, setProjects] = useState<Project[] | null>(null);
+  const [projects, setProjects] = useState<Project[]>([]);
 
   useEffect(() => {
     const fetchProjects = async () => {
@@ -59,11 +59,10 @@ const ProjectProvider: React.FunctionComponent = ({ children }) => {
     if (!_projects || _projects.length === 0) {
       return null;
     }
-    const firstProject = _projects[0];
     const currentProjectId = localStorage.getItem(CURRENT_PROJECT_ID);
     return currentProjectId
-      ? findById(_projects, currentProjectId) || firstProject
-      : firstProject;
+      ? findById(_projects, currentProjectId) || null
+      : null;
   };
 
   const handleAddProject = (project: Project) => {

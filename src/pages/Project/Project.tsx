@@ -35,14 +35,17 @@ const ProjectPage: React.FunctionComponent<RouteComponentProps<Params>> = ({
   const { isTestCasesFetched } = useContext(TestCaseContext);
 
   useEffect(() => {
-    if (projects) {
+    if (isProjectsFetched) {
       const project = findById(projects, match.params.pid);
       if (!project) {
-        history.push('/projects');
         onSelectProject(null);
+        history.push('/projects');
+      } else if (project !== currentProject) {
+        onSelectProject(project);
+        history.push(`/projects/${project._id}`);
       }
     }
-  }, [match.params.pid, projects]);
+  }, [match.params.pid, projects, isProjectsFetched]);
 
   return (
     <Layout>
