@@ -18,7 +18,7 @@ const ProjectCreate: React.FunctionComponent<RouteComponentProps> = ({
   history,
 }) => {
   const { user } = useContext(UserContext);
-  const { onAddProject, onSelectProject } = useContext(ProjectContext);
+  const { onAddProject } = useContext(ProjectContext);
   const {
     value: projectTitle,
     handleChange: handleProjectTitleChange,
@@ -41,8 +41,8 @@ const ProjectCreate: React.FunctionComponent<RouteComponentProps> = ({
 
     try {
       const project = await postProject(projectNew);
+      setIsLoading(false);
       onAddProject(project);
-      onSelectProject(project);
       notification.success({
         placement: 'bottomRight',
         message: `${project.title} created`,
@@ -50,13 +50,12 @@ const ProjectCreate: React.FunctionComponent<RouteComponentProps> = ({
       });
       history.push(`/projects/${project._id}`);
     } catch (error) {
+      setIsLoading(false);
       notification.error({
         placement: 'bottomRight',
         message: 'Failed to create project',
         description: error,
       });
-    } finally {
-      setIsLoading(false);
     }
   };
 

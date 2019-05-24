@@ -41,6 +41,7 @@ const CycleCreate: React.FunctionComponent<RouteComponentProps> = ({
 
     try {
       const cycle = await postCycle(cycleNew);
+      setIsLoading(false);
       onAddCycle(cycle);
       onSelectCycle(cycle);
       notification.success({
@@ -50,13 +51,12 @@ const CycleCreate: React.FunctionComponent<RouteComponentProps> = ({
       });
       history.push(`/projects/${currentProject!._id}`);
     } catch (error) {
+      setIsLoading(false);
       notification.error({
         placement: 'bottomRight',
         message: 'Failed to create cycle',
         description: error,
       });
-    } finally {
-      setIsLoading(false);
     }
   };
 
