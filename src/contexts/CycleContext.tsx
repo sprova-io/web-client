@@ -30,7 +30,7 @@ const initialContext: CycleContext = {
 const CycleContext = React.createContext<CycleContext>(initialContext);
 
 const CycleProvider: React.FunctionComponent = ({ children }) => {
-  const { currentProject } = useContext(ProjectContext);
+  const { currentProject, isProjectsFetched } = useContext(ProjectContext);
 
   const [currentCycle, setCurrentCycle] = useState<Cycle | null>(null);
   const [error, setError] = useState<string | null>(null);
@@ -38,6 +38,10 @@ const CycleProvider: React.FunctionComponent = ({ children }) => {
   const [cycles, setCycles] = useState<Cycle[]>([]);
 
   useEffect(() => {
+    if (!isProjectsFetched) {
+      return;
+    }
+
     if (!currentProject) {
       handleSelectCycle(null);
       setIsCyclesFetched(true);
