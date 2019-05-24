@@ -70,16 +70,14 @@ const Header: React.FunctionComponent<RouteComponentProps> = ({ history }) => {
                   </Option>
                 ))}
               </Select>
-              <span className="sprova-project-header-title">
-                {title || currentProject!.title}
-              </span>
-              {subTitle && (
-                <span className="sprova-project-header-title-sub">
-                  {subTitle}
-                </span>
-              )}
             </Fragment>
           ) : null}
+          <span className="sprova-project-header-title">
+            {title || (currentProject && currentProject!.title) || 'Sprova App'}
+          </span>
+          {subTitle && (
+            <span className="sprova-project-header-title-sub">{subTitle}</span>
+          )}
         </div>
         <div className="sprova-project-header-right">
           <div className="sprova-project-header-item">
