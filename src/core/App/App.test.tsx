@@ -1,4 +1,4 @@
-import PrivateRoute from '@/components/PrivateRoute';
+import PrivateRoute from '@/core/PrivateRoute';
 import { Login } from '@/pages';
 import React from 'react';
 import ReactDOM from 'react-dom';
