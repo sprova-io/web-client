@@ -5,7 +5,7 @@ import './ProjectLayout.scss';
 
 const ProjectLayout: React.FunctionComponent = ({ children }) => {
   return (
-    <div className="sprova-layout">
+    <div className="sprova-project-layout">
       <Sider />
       <Header title="Header" />
       {children}
