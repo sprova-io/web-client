@@ -3,6 +3,7 @@ import Level from '@/components/Level';
 import { CycleContext } from '@/contexts/CycleContext';
 import { ProjectContext } from '@/contexts/ProjectContext';
 import { UserContext } from '@/contexts/UserContext';
+import { LayoutContext } from '@/layouts/ProjectLayout/LayoutContext';
 import { Cycle } from '@/models';
 import { findById } from '@/utils';
 import { Button, Dropdown, Icon, Menu, Select } from 'antd';
@@ -13,19 +14,11 @@ import './Header.scss';
 
 const Option = Select.Option;
 
-interface Props extends RouteComponentProps {
-  subTitle?: string;
-  title: React.ReactNode;
-}
-
-const Header: React.FunctionComponent<Props> = ({
-  history,
-  subTitle,
-  title,
-}) => {
+const Header: React.FunctionComponent<RouteComponentProps> = ({ history }) => {
   const { currentCycle, cycles, onSelectCycle } = useContext(CycleContext);
   const { currentProject } = useContext(ProjectContext);
   const { user, onLogout } = useContext(UserContext);
+  const { subTitle, title } = useContext(LayoutContext);
 
   const signout = () => {
     logout();
@@ -55,9 +48,9 @@ const Header: React.FunctionComponent<Props> = ({
   };
 
   return (
-    <div className="sprova-header">
+    <div className="sprova-project-header">
       <Level style={{ height: '100%' }}>
-        <div className="sprova-header-left">
+        <div className="sprova-project-header-left">
           {currentCycle ? (
             <Fragment>
               <Link to={`/projects/${currentProject!._id}/cycles/new`}>
@@ -77,18 +70,22 @@ const Header: React.FunctionComponent<Props> = ({
                   </Option>
                 ))}
               </Select>
-              <span className="sprova-header-title">{title}</span>
+              <span className="sprova-project-header-title">
+                {title || currentProject!.title}
+              </span>
               {subTitle && (
-                <span className="sprova-header-title-sub">{subTitle}</span>
+                <span className="sprova-project-header-title-sub">
+                  {subTitle}
+                </span>
               )}
             </Fragment>
           ) : null}
         </div>
-        <div className="sprova-header-right">
-          <div className="sprova-header-item">
+        <div className="sprova-project-header-right">
+          <div className="sprova-project-header-item">
             <Link to={`/users/${user!._id}`}>{user!.username}</Link>
           </div>
-          <div className="sprova-header-item">
+          <div className="sprova-project-header-item">
             <Dropdown overlay={optionsMenu} placement="bottomRight">
               <a className="ant-dropdown-link" href="#">
                 Options <Icon type="down" />

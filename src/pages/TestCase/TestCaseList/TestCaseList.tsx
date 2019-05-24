@@ -7,10 +7,10 @@ import { TestCaseContext } from '@/contexts/TestCaseContext';
 import { useFormInput } from '@/hooks/useFormInput';
 import { Page } from '@/layouts/ProjectLayout';
 import { TestCase } from '@/models';
-import { Breadcrumb, Button, Icon } from 'antd';
+import { Button, Icon } from 'antd';
 import * as _ from 'lodash';
-import React, { Fragment, useContext } from 'react';
-import { Link, RouteComponentProps, withRouter } from 'react-router-dom';
+import React, { useContext } from 'react';
+import { RouteComponentProps, withRouter } from 'react-router-dom';
 
 const TestCaseList: React.FunctionComponent<RouteComponentProps> = ({
   history,
@@ -36,7 +36,7 @@ const TestCaseList: React.FunctionComponent<RouteComponentProps> = ({
   const resetQuery = () => setQuery('');
 
   return (
-    <Page loading={!isTestCasesFetched}>
+    <Page loading={!isTestCasesFetched} subTitle="All" title="Test Cases">
       <Card>
         <CardHeader>
           <h4 style={{ marginBottom: 16 }}>Test Cases</h4>

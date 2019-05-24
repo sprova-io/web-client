@@ -30,7 +30,7 @@ const ExecutionOverview: React.FunctionComponent<
   };
 
   return (
-    <Page>
+    <Page subTitle="" title="Executions">
       {error && (
         <Alert
           message="Something went wrong"

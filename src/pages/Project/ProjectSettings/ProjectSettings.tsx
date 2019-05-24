@@ -95,7 +95,7 @@ const ProjectSettings: React.FunctionComponent<RouteComponentProps> = ({
   );
 
   return (
-    <Page>
+    <Page subTitle={currentProject!.title} title="Project Settings">
       <Card style={{ marginBottom: 24 }}>
         <CardHeader>
           <Level>

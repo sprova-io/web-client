@@ -61,7 +61,7 @@ const ProjectCreate: React.FunctionComponent<RouteComponentProps> = ({
   };
 
   return (
-    <Page>
+    <Page subTitle="" title="Create New Project">
       <Helmet>
         <title>Sprova | Create Project</title>
       </Helmet>

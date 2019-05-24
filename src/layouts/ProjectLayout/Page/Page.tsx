@@ -1,5 +1,6 @@
 import PageLoad from '@/components/PageLoad';
-import React from 'react';
+import { LayoutContext } from '@/layouts/ProjectLayout/LayoutContext';
+import React, { useContext, useEffect } from 'react';
 import './Page.scss';
 
 interface PageProps {
@@ -14,7 +15,21 @@ const Page: React.FunctionComponent<PageProps> = ({
   subTitle,
   title,
 }) => {
-  return <div className="sprova-page">{loading ? <PageLoad /> : children}</div>;
+  const { setSubTitle, setTitle } = useContext(LayoutContext);
+
+  useEffect(() => {
+    setSubTitle(subTitle || null);
+  }, [subTitle]);
+
+  useEffect(() => {
+    setTitle(title || null);
+  }, [title]);
+
+  return (
+    <div className="sprova-project-page">
+      {loading ? <PageLoad /> : children}
+    </div>
+  );
 };
 
 export default Page;

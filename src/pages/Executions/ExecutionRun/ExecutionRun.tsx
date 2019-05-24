@@ -220,7 +220,11 @@ const ExecutionRun: React.FunctionComponent<RouteComponentProps<Params>> = ({
   };
 
   return (
-    <Page loading={isContextLoading || isTestCasesLoading}>
+    <Page
+      loading={isContextLoading || isTestCasesLoading}
+      subTitle={contextId as string}
+      title="Run Execution"
+    >
       <Progress
         status={getExecutionProgess() < 100 ? 'active' : 'success'}
         className="execution-progress"

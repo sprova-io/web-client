@@ -139,7 +139,7 @@ const TestCaseCreate: React.FunctionComponent<RouteComponentProps<Params>> = ({
   }, [parent]);
 
   return (
-    <Page>
+    <Page subTitle="" title="Create New Test Case">
       <Card style={{ marginBottom: 24 }}>
         <CardHeader>
           <h4>General Information</h4>

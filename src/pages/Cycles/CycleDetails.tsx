@@ -15,7 +15,7 @@ const CycleDetails: React.FunctionComponent = () => {
   const { currentCycle } = useContext(CycleContext);
 
   return (
-    <Page>
+    <Page subTitle={currentCycle!.title} title={currentProject!.title}>
       <Row gutter={24}>
         <Col span={8}>
           <Card>

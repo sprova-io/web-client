@@ -61,7 +61,7 @@ const CycleCreate: React.FunctionComponent<RouteComponentProps> = ({
   };
 
   return (
-    <Page>
+    <Page subTitle="" title="Create New Cycle">
       <Card style={{ marginBottom: 24 }}>
         <CardHeader>
           <Level>

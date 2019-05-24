@@ -124,7 +124,11 @@ const TestCaseDetails: React.FunctionComponent<RouteComponentProps<Params>> = ({
   //     />
 
   return (
-    <Page loading={!testCase}>
+    <Page
+      loading={!testCase}
+      subTitle={(testCase && testCase._id) || ''}
+      title={(testCase && testCase.title) || 'Test Case'}
+    >
       {activeTabKey === 'overview' ? (
         <OverviewTab testCase={testCase!} testCases={testCases} />
       ) : activeTabKey === 'executions' ? (

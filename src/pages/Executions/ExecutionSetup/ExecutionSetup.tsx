@@ -102,7 +102,7 @@ const ExecutionSetup: React.FunctionComponent<RouteComponentProps<Params>> = ({
   };
 
   return (
-    <Page>
+    <Page subTitle="Setup" title="Start New Execution">
       <Card style={{ marginBottom: 24 }}>
         <CardHeader>
           <h4>Execution Target</h4>
