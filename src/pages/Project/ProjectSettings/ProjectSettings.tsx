@@ -18,7 +18,7 @@ const { Text } = Typography;
 const ProjectSettings: React.FunctionComponent<RouteComponentProps> = ({
   history,
 }) => {
-  const { currentProject } = useContext(ProjectContext);
+  const { currentProject, onRemoveProject } = useContext(ProjectContext);
 
   const {
     value: projectTitle,
@@ -32,11 +32,12 @@ const ProjectSettings: React.FunctionComponent<RouteComponentProps> = ({
   const [isLoading, setIsLoading] = useState(false);
   const [isDeleteLoading, setIsDeleteLoading] = useState(false);
 
-  const deleteRequest = async () => {
+  const handleDeleteProject = async () => {
     setIsDeleteLoading(true);
     try {
       await deleteProject(currentProject!._id);
       setIsDeleteLoading(false);
+      onRemoveProject(currentProject!);
       notification.success({
         placement: 'bottomRight',
         message: `${currentProject!.title} deleted`,
@@ -79,21 +80,6 @@ const ProjectSettings: React.FunctionComponent<RouteComponentProps> = ({
     }
   };
 
-  const deleteButton = (
-    <Popconfirm
-      placement="bottomRight"
-      title="Delete this project?"
-      onConfirm={deleteRequest}
-      icon={<Icon type="question-circle-o" style={{ color: 'red' }} />}
-      okText="Yes"
-      cancelText="Cancel"
-    >
-      <Button type="danger" loading={isDeleteLoading}>
-        Delete
-      </Button>
-    </Popconfirm>
-  );
-
   return (
     <Page subTitle={currentProject!.title} title="Project Settings">
       <Card style={{ marginBottom: 24 }}>
@@ -129,9 +115,22 @@ const ProjectSettings: React.FunctionComponent<RouteComponentProps> = ({
         loading={isLoading}
         disabled={!projectTitle}
         onClick={handleSubmit}
+        style={{ marginRight: 16 }}
       >
         Save
       </Button>
+      <Popconfirm
+        placement="bottomLeft"
+        title="Delete this project?"
+        onConfirm={handleDeleteProject}
+        icon={<Icon type="question-circle-o" style={{ color: 'red' }} />}
+        okText="Yes"
+        cancelText="Cancel"
+      >
+        <Button type="danger" loading={isDeleteLoading}>
+          Delete
+        </Button>
+      </Popconfirm>
     </Page>
   );
 };
