@@ -25,17 +25,21 @@ const ProjectPage: React.FunctionComponent<RouteComponentProps<Params>> = ({
   history,
   match,
 }) => {
-  const { currentProject, isProjectsFetched, projects } = useContext(
-    ProjectContext
-  );
+  const {
+    currentProject,
+    isProjectsFetched,
+    projects,
+    onSelectProject,
+  } = useContext(ProjectContext);
   const { currentCycle, isCyclesFetched } = useContext(CycleContext);
   const { isTestCasesFetched } = useContext(TestCaseContext);
 
   useEffect(() => {
-    if (projects && match.params.pid) {
+    if (projects) {
       const project = findById(projects, match.params.pid);
       if (!project) {
         history.push('/projects');
+        onSelectProject(null);
       }
     }
   }, [match.params.pid, projects]);
@@ -57,6 +61,7 @@ const ProjectPage: React.FunctionComponent<RouteComponentProps<Params>> = ({
             exact={true}
             component={CyclesNotFound}
           />
+          <Route path="/projects/:pid/settings" component={ProjectSettings} />
           <Redirect to={`/projects/${currentProject._id}`} />
         </Switch>
       ) : !isTestCasesFetched ? (

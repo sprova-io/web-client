@@ -39,6 +39,7 @@ const CycleProvider: React.FunctionComponent = ({ children }) => {
 
   useEffect(() => {
     if (!currentProject) {
+      handleSelectCycle(null);
       setIsCyclesFetched(true);
       return;
     }
@@ -88,8 +89,12 @@ const CycleProvider: React.FunctionComponent = ({ children }) => {
     setCycles(_.without(cycles, cycle));
   };
 
-  const handleSelectCycle = (cycle: Cycle) => {
-    localStorage.setItem(CURRENT_CYCLE_ID, cycle._id);
+  const handleSelectCycle = (cycle: Cycle | null) => {
+    if (cycle) {
+      localStorage.setItem(CURRENT_CYCLE_ID, cycle._id);
+    } else {
+      localStorage.removeItem(CURRENT_CYCLE_ID);
+    }
     setCurrentCycle(cycle);
   };
 

@@ -68,10 +68,12 @@ const ProjectProvider: React.FunctionComponent = ({ children }) => {
 
   const handleAddProject = (project: Project) => {
     setProjects([...(projects || []), project]);
+    handleSelectProject(project);
   };
 
   const handleRemoveProject = (project: Project) => {
     setProjects(_.without(projects, project));
+    handleSelectProject(null);
   };
 
   const handleSelectProject = (project: Project | null) => {
